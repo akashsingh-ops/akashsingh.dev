@@ -1,0 +1,65 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --bg-primary: #0B0D0F;
+    --bg-secondary: #111418;
+    --bg-elevated: #171B20;
+    --border-subtle: rgba(255, 255, 255, 0.08);
+    --border-hover: rgba(255, 255, 255, 0.16);
+    --text-primary: #F5F5F2;
+    --text-secondary: #9A9FA8;
+    --text-muted: #666C75;
+    --accent-orange: #FF7A18;
+    --accent-blue: #7C9CFF;
+  }
+
+  body {
+    background-color: #0B0D0F;
+    color: #F5F5F2;
+    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    letter-spacing: -0.01em;
+  }
+
+  code, kbd, samp, pre, .font-mono {
+    font-family: 'JetBrains Mono', 'Geist Mono', monospace;
+  }
+}
+
+/* Minimal Custom scrollbar */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0B0D0F;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #171B20;
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #30363D;
+}
+
+/* Subtle Editorial Background Mesh */
+.subtle-mesh {
+  background-image: radial-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+/* Smooth Focus Rings */
+button:focus-visible, a:focus-visible {
+  outline: 2px solid #FF7A18;
+  outline-offset: 2px;
+}
+
+/* Text selections */
+::selection {
+  background-color: rgba(255, 122, 24, 0.25);
+  color: #F5F5F2;
+}
+
