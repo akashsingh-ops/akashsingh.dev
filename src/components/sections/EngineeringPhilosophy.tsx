@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
-import { motion, useReducedMotion, AnimatePresence } from 'motion/react';
+import { motion, useReducedMotion } from 'motion/react';
 import {
   CinematicSection,
-  childItemVariant,
-  childItemScaleVariant
+  childItemVariant
 } from '../ui/CinematicSection';
 
 interface Pillar {
@@ -51,7 +50,6 @@ export const EngineeringPhilosophy: React.FC = () => {
   const shouldReduceMotion = useReducedMotion();
 
   const activePillar = pillars.find((p) => p.id === selectedPillarId) || pillars[0];
-
   const coreSequence = ['UNDERSTAND', 'DESIGN', 'BUILD', 'MEASURE', 'IMPROVE'];
 
   return (
@@ -60,96 +58,92 @@ export const EngineeringPhilosophy: React.FC = () => {
       chapterNumber="05"
       chapterLabel="PHILOSOPHY"
       motionType="philosophy"
-      className="py-24 sm:py-36"
+      className="py-24 sm:py-36 relative"
     >
-      <div className="max-w-5xl mx-auto px-6 sm:px-8 space-y-16">
-        {/* Section Tag */}
+      <div className="max-w-7xl mx-auto px-6 sm:px-8 space-y-16">
+        
+        {/* Section Header */}
         <motion.div
-          className="space-y-4 max-w-2xl"
+          className="space-y-4 max-w-3xl"
           variants={shouldReduceMotion ? undefined : childItemVariant}
         >
-          <div className="flex items-center gap-3 font-mono text-xs text-[#9A9FA8]">
-            <span className="text-[#FF7A18] font-bold">05</span>
+          <div className="flex items-center gap-3 font-mono text-xs text-[#7E8994]">
+            <span className="text-[#FF6B53] font-bold">05</span>
             <span className="text-white/20">/</span>
             <span className="uppercase tracking-widest">ENGINEERING PHILOSOPHY</span>
           </div>
 
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#F5F5F2] tracking-tight leading-tight">
-            Understand the problem before writing the code.
+          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-[#FFFFFF] tracking-tight leading-[1.08]">
+            Understand the problem<br />
+            before writing code<span className="text-[#FF6B53]">.</span>
           </h2>
 
-          <p className="text-base sm:text-lg text-[#9A9FA8] leading-relaxed">
+          <p className="text-lg sm:text-xl text-[#C3CBD3] leading-relaxed">
             First-principles mental models governing system design, database queries, and architectural longevity.
           </p>
         </motion.div>
 
         {/* Dynamic Philosophy Sequence: UNDERSTAND -> DESIGN -> BUILD -> MEASURE -> IMPROVE */}
-        <motion.div
-          className="p-5 sm:p-6 rounded-2xl bg-[#111418] border border-white/8 flex flex-wrap items-center justify-between gap-3 font-mono text-xs"
-          variants={shouldReduceMotion ? undefined : childItemScaleVariant}
-        >
-          <span className="text-[#666C75] uppercase tracking-wider text-[11px] block sm:inline">
+        <div className="p-5 sm:p-6 rounded-2xl bg-[#151E27] border border-white/8 flex flex-wrap items-center justify-between gap-3 font-mono text-xs">
+          <span className="text-[#7E8994] uppercase tracking-wider text-[11px]">
             // Core Mental Sequence:
           </span>
-          <div className="flex flex-wrap items-center gap-2 text-xs font-bold text-[#F5F5F2]">
+          <div className="flex flex-wrap items-center gap-2 text-xs font-bold text-[#FFFFFF]">
             {coreSequence.map((item, idx) => (
               <React.Fragment key={item}>
-                <span className={item === 'UNDERSTAND' || item === 'BUILD' || item === 'IMPROVE' ? 'text-[#FF7A18]' : 'text-[#9A9FA8]'}>
+                <span className={item === 'UNDERSTAND' || item === 'BUILD' || item === 'IMPROVE' ? 'text-[#FF6B53]' : 'text-[#C3CBD3]'}>
                   {item}
                 </span>
                 {idx < coreSequence.length - 1 && (
-                  <span className="text-white/20">→</span>
+                  <span className="text-[#7E8994]">→</span>
                 )}
               </React.Fragment>
             ))}
           </div>
-        </motion.div>
+        </div>
 
-        {/* Interactive 5 Pillars Selector */}
-        <div className="space-y-6">
-          <div className="flex flex-wrap items-center gap-2 sm:gap-3 border-b border-white/8 pb-4">
+        {/* Interactive Philosophy Pillars */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+          
+          {/* Pillar Selector Tabs */}
+          <div className="lg:col-span-4 space-y-2">
             {pillars.map((pillar) => {
               const isSelected = selectedPillarId === pillar.id;
               return (
                 <button
                   key={pillar.id}
                   onClick={() => setSelectedPillarId(pillar.id)}
-                  className={`px-4 py-2 rounded-xl font-mono text-xs sm:text-sm font-bold tracking-wider transition-all duration-200 ${
+                  className={`w-full p-4 rounded-xl text-left font-mono text-xs font-bold transition-all duration-200 flex items-center justify-between ${
                     isSelected
-                      ? 'bg-[#FF7A18] text-white shadow-lg shadow-[#FF7A18]/25 scale-105'
-                      : 'bg-[#111418] text-[#9A9FA8] hover:text-[#F5F5F2] border border-white/6 hover:border-white/15'
+                      ? 'bg-[#151E27] text-[#FF6B53] border border-[#FF6B53]/50 shadow-md'
+                      : 'bg-[#151E27]/30 text-[#7E8994] hover:text-[#FFFFFF] hover:bg-[#151E27]/60 border border-white/5'
                   }`}
                 >
-                  {pillar.name}
+                  <span>{pillar.name}</span>
+                  {isSelected && <span className="w-1.5 h-1.5 rounded-full bg-[#FF6B53]" />}
                 </button>
               );
             })}
           </div>
 
-          {/* Active Rule Display Box with smooth transition */}
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={activePillar.id}
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
-              transition={{ duration: 0.3 }}
-              className="p-8 sm:p-10 rounded-2xl bg-[#111418] border border-white/8 space-y-4 relative overflow-hidden"
-            >
-              <div className="text-[11px] font-mono text-[#FF7A18] uppercase tracking-widest font-bold">
-                // Rule of {activePillar.name}
-              </div>
-
-              <blockquote className="text-xl sm:text-2xl font-bold text-[#F5F5F2] tracking-tight leading-snug">
+          {/* Active Pillar Statement */}
+          <div className="lg:col-span-8 p-8 sm:p-10 rounded-3xl bg-[#151E27] border border-white/8 space-y-6">
+            <div className="space-y-3">
+              <span className="text-xs font-mono text-[#FF6B53] font-bold uppercase tracking-widest">
+                Principle // {activePillar.name}
+              </span>
+              <h3 className="text-2xl sm:text-3xl font-extrabold text-[#FFFFFF] tracking-tight leading-snug">
                 "{activePillar.rule}"
-              </blockquote>
+              </h3>
+            </div>
 
-              <p className="text-sm sm:text-base text-[#9A9FA8] leading-relaxed pt-2">
-                {activePillar.context}
-              </p>
-            </motion.div>
-          </AnimatePresence>
+            <p className="text-base text-[#C3CBD3] leading-relaxed pt-2 border-t border-white/8">
+              {activePillar.context}
+            </p>
+          </div>
+
         </div>
+
       </div>
     </CinematicSection>
   );

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Terminal, ArrowUpRight, Github, Linkedin, Menu, X, FileText } from 'lucide-react';
+import { Terminal, ArrowUpRight, Menu, X } from 'lucide-react';
 import { profileData, RESUME_URL } from '../../data/profile';
 
 interface NavbarProps {
@@ -12,7 +12,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenTerminal }) => {
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 40);
+      setIsScrolled(window.scrollY > 30);
     };
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
@@ -29,91 +29,72 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenTerminal }) => {
     <>
       <header
         className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 pointer-events-none flex justify-center ${
-          isScrolled ? 'pt-4 sm:pt-5' : 'pt-6 sm:pt-8'
+          isScrolled ? 'pt-3 sm:pt-4' : 'pt-5 sm:pt-6'
         }`}
       >
         <div
           className={`pointer-events-auto transition-all duration-300 flex items-center justify-between ${
             isScrolled
-              ? 'bg-[#111418]/85 backdrop-blur-md border border-white/10 rounded-full px-5 py-2.5 shadow-2xl max-w-4xl w-[92%] sm:w-auto gap-6 sm:gap-8'
-              : 'w-full max-w-7xl px-6 sm:px-8'
+              ? 'bg-[#151E27]/85 backdrop-blur-md border border-white/10 rounded-full px-5 py-2 shadow-2xl max-w-5xl w-[92%] sm:w-auto gap-6 sm:gap-10'
+              : 'w-full max-w-7xl px-6 sm:px-8 py-2'
           }`}
         >
-          {/* Logo / Name */}
+          {/* Left: AKASH */}
           <a
             href="#"
-            className="flex items-center gap-2 group text-[#F5F5F2] tracking-tight text-sm sm:text-base font-semibold focus:outline-none"
+            className="flex items-center gap-2 group text-[#FFFFFF] tracking-tight text-sm sm:text-base font-extrabold focus:outline-none"
           >
-            <span className="font-mono text-[#FF7A18] text-xs font-bold px-1.5 py-0.5 rounded bg-[#FF7A18]/10 border border-[#FF7A18]/20">
-              AS
-            </span>
-            <span className="tracking-tight hover:text-[#FF7A18] transition-colors">
-              Akash Singh
+            <span className="tracking-wider uppercase hover:text-[#FF6B53] transition-colors">
+              AKASH
             </span>
           </a>
 
-          {/* Desktop Nav Items */}
-          <nav className="hidden md:flex items-center gap-6 text-xs text-[#9A9FA8]">
+          {/* Center/Right: Work, Journey, Thinking, About */}
+          <nav className="hidden md:flex items-center gap-7 text-xs font-mono text-[#C3CBD3]">
             {navLinks.map((link) => (
               <a
                 key={link.name}
                 href={link.href}
-                className="hover:text-[#F5F5F2] transition-colors tracking-wide font-medium py-1"
+                className="hover:text-[#FFFFFF] hover:text-[#FF6B53] transition-colors tracking-wide font-medium py-1"
               >
                 {link.name}
               </a>
             ))}
+          </nav>
 
-            {/* Subtle Desktop Resume Action */}
+          {/* Right: Terminal, Resume ↗ */}
+          <div className="flex items-center gap-2.5 sm:gap-3">
+            {/* Terminal Trigger */}
+            <button
+              onClick={onOpenTerminal}
+              className="group px-3 py-1.5 rounded-lg bg-[#0F161E] hover:bg-[#1B2630] text-[#C3CBD3] hover:text-[#FFFFFF] border border-white/10 hover:border-[#FF6B53]/50 transition-all duration-200 text-xs font-mono flex items-center gap-2 focus:outline-none"
+              title="Open Developer Terminal CLI (⌘K / Ctrl+K)"
+              aria-label="Open Developer Terminal CLI"
+            >
+              <Terminal className="w-3.5 h-3.5 text-[#FF6B53] group-hover:scale-110 transition-transform" />
+              <span className="hidden sm:inline text-xs font-medium">Terminal</span>
+              <kbd className="hidden sm:inline-flex items-center px-1.5 py-0.5 text-[10px] font-mono text-[#7E8994] bg-white/5 border border-white/10 rounded group-hover:text-[#FF6B53] group-hover:border-[#FF6B53]/30 transition-colors">
+                ⌘K
+              </kbd>
+            </button>
+
+            {/* Resume Link */}
             <a
               href={RESUME_URL}
               target="_blank"
               rel="noopener noreferrer"
               aria-label="View Akash Singh's resume — opens in a new tab"
-              className="group inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[#F5F5F2] hover:text-white bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 transition-all duration-200 text-xs font-medium focus:outline-none focus:ring-2 focus:ring-[#FF7A18]/50"
+              className="group inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[#FFFFFF] hover:text-[#0F161E] bg-[#FF6B53]/15 hover:bg-[#FF6B53] border border-[#FF6B53]/30 hover:border-[#FF6B53] transition-all duration-200 text-xs font-mono font-medium focus:outline-none"
             >
-              <FileText className="w-3.5 h-3.5 text-[#9A9FA8] group-hover:text-[#FF7A18] transition-transform duration-200 group-hover:-translate-y-0.5" />
-              <span>View Resume</span>
-              <ArrowUpRight className="w-3 h-3 text-[#9A9FA8] group-hover:text-[#FF7A18] transition-transform duration-200 group-hover:translate-x-1 group-hover:-translate-y-1" />
-            </a>
-          </nav>
-
-          {/* Right Action Icons */}
-          <div className="flex items-center gap-2 sm:gap-3">
-            <button
-              onClick={onOpenTerminal}
-              className="p-1.5 sm:px-2.5 sm:py-1 rounded-full sm:rounded-md bg-white/5 hover:bg-white/10 text-[#9A9FA8] hover:text-[#FF7A18] border border-white/8 transition-colors text-xs font-mono flex items-center gap-1.5"
-              title="Open Terminal CLI (Press 'T')"
-            >
-              <Terminal className="w-3.5 h-3.5 text-[#FF7A18]" />
-              <span className="hidden lg:inline text-[11px]">CLI</span>
-            </button>
-
-            <a
-              href={profileData.socialLinks.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="p-1.5 rounded-full sm:rounded-md bg-white/5 hover:bg-white/10 text-[#9A9FA8] hover:text-[#F5F5F2] border border-white/8 transition-colors"
-              aria-label="GitHub Profile"
-            >
-              <Github className="w-3.5 h-3.5" />
+              <span>Resume</span>
+              <ArrowUpRight className="w-3 h-3 text-[#FF6B53] group-hover:text-[#0F161E] transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
             </a>
 
-            <a
-              href={profileData.socialLinks.linkedin}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hidden sm:flex items-center gap-1 px-3 py-1 rounded-md bg-[#FF7A18]/10 hover:bg-[#FF7A18]/20 text-[#FF7A18] border border-[#FF7A18]/30 transition-colors text-xs font-medium"
-            >
-              <span>LinkedIn</span>
-              <ArrowUpRight className="w-3 h-3" />
-            </a>
-
-            {/* Mobile Menu Toggle */}
+            {/* Mobile Hamburger Toggle */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="md:hidden p-1.5 rounded-full bg-white/5 text-[#9A9FA8] hover:text-[#F5F5F2]"
-              aria-label="Toggle menu"
+              className="p-1.5 rounded-lg bg-white/5 hover:bg-white/10 text-[#C3CBD3] hover:text-[#FFFFFF] md:hidden"
+              aria-label="Toggle navigation menu"
             >
               {mobileMenuOpen ? <X className="w-4 h-4" /> : <Menu className="w-4 h-4" />}
             </button>
@@ -123,57 +104,44 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenTerminal }) => {
 
       {/* Mobile Drawer Navigation */}
       {mobileMenuOpen && (
-        <div className="fixed inset-0 z-30 bg-[#0B0D0F]/95 backdrop-blur-lg flex flex-col justify-center px-8 space-y-6 md:hidden animate-fadeIn">
-          <div className="flex flex-col space-y-4 text-lg font-medium text-[#9A9FA8]">
-            {navLinks.map((link) => (
-              <a
-                key={link.name}
-                href={link.href}
-                onClick={() => setMobileMenuOpen(false)}
-                className="hover:text-[#FF7A18] transition-colors"
-              >
-                {link.name}
-              </a>
-            ))}
+        <div className="fixed inset-0 z-30 bg-[#0F161E]/95 backdrop-blur-lg md:hidden pt-24 px-6 flex flex-col justify-between pb-12">
+          <div className="space-y-6">
+            <div className="text-xs font-mono text-[#7E8994] uppercase tracking-widest pb-2 border-b border-white/10">
+              // Navigation
+            </div>
+            <nav className="space-y-4 font-mono text-base">
+              {navLinks.map((link) => (
+                <a
+                  key={link.name}
+                  href={link.href}
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="block text-[#FFFFFF] hover:text-[#FF6B53] transition-colors py-2 border-b border-white/5"
+                >
+                  {link.name}
+                </a>
+              ))}
+            </nav>
           </div>
 
-          {/* Mobile Resume Link */}
-          <div className="pt-4 border-t border-white/10 space-y-2">
+          <div className="space-y-3 pt-6 border-t border-white/10">
+            <button
+              onClick={() => {
+                setMobileMenuOpen(false);
+                onOpenTerminal();
+              }}
+              className="w-full py-3 rounded-xl bg-[#151E27] border border-white/10 text-xs font-mono text-[#FFFFFF] flex items-center justify-center gap-2"
+            >
+              <Terminal className="w-4 h-4 text-[#FF6B53]" />
+              <span>Launch Terminal CLI</span>
+            </button>
+
             <a
               href={RESUME_URL}
               target="_blank"
               rel="noopener noreferrer"
-              onClick={() => setMobileMenuOpen(false)}
-              aria-label="View Akash Singh's resume — opens in a new tab"
-              className="group flex items-center justify-between p-3 rounded-xl bg-[#171B20] border border-white/10 hover:border-white/20 text-sm font-medium text-[#F5F5F2] hover:text-white transition-all duration-200"
+              className="w-full py-3 rounded-xl bg-[#FF6B53] text-[#0F161E] font-bold text-xs font-mono flex items-center justify-center gap-2"
             >
-              <div className="flex items-center gap-2">
-                <FileText className="w-4 h-4 text-[#FF7A18] group-hover:-translate-y-0.5 transition-transform duration-200" />
-                <span>View Resume</span>
-              </div>
-              <ArrowUpRight className="w-4 h-4 text-[#9A9FA8] group-hover:text-[#FF7A18] transition-transform duration-200 group-hover:translate-x-1 group-hover:-translate-y-1" />
-            </a>
-          </div>
-
-          <div className="pt-4 border-t border-white/10 flex items-center gap-4">
-
-            <a
-              href={profileData.socialLinks.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-1.5 text-sm text-[#F5F5F2]"
-            >
-              <Github className="w-4 h-4" />
-              <span>GitHub</span>
-            </a>
-            <a
-              href={profileData.socialLinks.linkedin}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-1.5 text-sm text-[#FF7A18]"
-            >
-              <Linkedin className="w-4 h-4" />
-              <span>LinkedIn</span>
+              <span>View Official Resume ↗</span>
             </a>
           </div>
         </div>

@@ -8,11 +8,11 @@ interface FooterProps {
 
 export const Footer: React.FC<FooterProps> = ({ onOpenTerminal }) => {
   return (
-    <footer className="border-t border-white/8 bg-[#0B0D0F] py-12 text-[#666C75] text-xs font-mono">
-      <div className="max-w-5xl mx-auto px-6 sm:px-8 space-y-6">
+    <footer className="border-t border-white/8 bg-[#0F161E] py-12 text-[#7E8994] text-xs font-mono">
+      <div className="max-w-7xl mx-auto px-6 sm:px-8 space-y-6">
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
-          <div className="flex items-center gap-2 text-[#9A9FA8]">
-            <span className="font-bold text-[#F5F5F2]">AKASH SINGH</span>
+          <div className="flex items-center gap-2 text-[#C3CBD3]">
+            <span className="font-bold text-[#FFFFFF]">AKASH SINGH</span>
             <span>·</span>
             <span>Backend Software Engineer</span>
           </div>
@@ -23,7 +23,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenTerminal }) => {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="GitHub Profile (opens in a new tab)"
-              className="text-[#9A9FA8] hover:text-[#F5F5F2] transition-colors"
+              className="text-[#C3CBD3] hover:text-[#FFFFFF] transition-colors"
             >
               GitHub ↗
             </a>
@@ -32,7 +32,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenTerminal }) => {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="LinkedIn Profile (opens in a new tab)"
-              className="text-[#9A9FA8] hover:text-[#FF7A18] transition-colors"
+              className="text-[#C3CBD3] hover:text-[#FF6B53] transition-colors"
             >
               LinkedIn ↗
             </a>
@@ -41,7 +41,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenTerminal }) => {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="LeetCode Profile (opens in a new tab)"
-              className="text-[#9A9FA8] hover:text-[#F5F5F2] transition-colors"
+              className="text-[#C3CBD3] hover:text-[#FFFFFF] transition-colors"
             >
               LeetCode ↗
             </a>
@@ -50,7 +50,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenTerminal }) => {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="DEVLORE (opens in a new tab)"
-              className="text-[#9A9FA8] hover:text-[#F5F5F2] transition-colors"
+              className="text-[#C3CBD3] hover:text-[#FFFFFF] transition-colors"
             >
               DEVLORE ↗
             </a>
@@ -59,21 +59,21 @@ export const Footer: React.FC<FooterProps> = ({ onOpenTerminal }) => {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="View Akash Singh's resume — opens in a new tab"
-              className="text-[#F5F5F2] hover:text-[#FF7A18] font-medium transition-colors"
+              className="text-[#FFFFFF] hover:text-[#FF6B53] font-medium transition-colors"
             >
               Resume ↗
             </a>
             <button
               onClick={onOpenTerminal}
-              className="text-[#666C75] hover:text-[#FF7A18] transition-colors flex items-center gap-1"
+              className="text-[#7E8994] hover:text-[#FF6B53] transition-colors flex items-center gap-1"
             >
-              <Terminal className="w-3 h-3 text-[#FF7A18]" />
-              <span>CLI</span>
+              <Terminal className="w-3.5 h-3.5 text-[#FF6B53]" />
+              <span>CLI (⌘K)</span>
             </button>
           </div>
         </div>
 
-        <div className="pt-4 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between gap-2 text-[11px] text-[#666C75]">
+        <div className="pt-4 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between gap-2 text-[11px] text-[#7E8994]">
           <div>
             © {new Date().getFullYear()} Akash Singh
           </div>

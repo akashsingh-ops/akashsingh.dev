@@ -48,74 +48,56 @@ export const GeekSearchDiagram: React.FC = () => {
   };
 
   return (
-    <div className="bg-[#0D1117] border border-[#30363D] rounded-xl p-4 sm:p-6 space-y-5">
-      <div className="flex flex-wrap items-center justify-between gap-3 pb-3 border-b border-[#21262D]">
+    <div className="bg-[#0F161E] border border-white/8 rounded-2xl p-4 sm:p-6 space-y-5">
+      <div className="flex flex-wrap items-center justify-between gap-3 pb-3 border-b border-white/6">
         <div className="flex items-center gap-2">
-          <span className="w-2.5 h-2.5 rounded-full bg-[#FF6A00]" />
-          <span className="font-mono text-xs font-bold text-white uppercase tracking-wider">
+          <span className="w-2 h-2 rounded-full bg-[#FF6B53]" />
+          <span className="font-mono text-xs font-bold text-[#FFFFFF] uppercase tracking-wider">
             GEEK-SEARCH // CONCURRENCY & LEADERBOARD PIPELINE
           </span>
         </div>
         <button
           onClick={handleSimulate}
           disabled={isSimulating}
-          className="flex items-center gap-1.5 px-3 py-1 rounded bg-[#FF6A00]/20 hover:bg-[#FF6A00]/30 text-[#FFA34D] border border-[#FF6A00]/40 font-mono text-xs transition-colors disabled:opacity-50"
+          className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#151E27] hover:bg-[#1B2630] border border-[#FF6B53]/40 text-[#FF6B53] font-mono text-xs font-semibold transition-all disabled:opacity-50"
         >
-          <Play className="w-3.5 h-3.5" />
-          <span>{isSimulating ? 'Simulating...' : 'Simulate Submission Flow'}</span>
+          <Play className="w-3 h-3" />
+          <span>{isSimulating ? 'Processing...' : 'Simulate Submission'}</span>
         </button>
       </div>
 
-      {/* Step Pipeline Visualization */}
+      {/* 4-Step Student to Leaderboard Pipeline Flow */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
         {pipelineSteps.map((step, idx) => {
-          const isCurrent = activeStep === idx;
-          const isPassed = activeStep > idx;
-
+          const isActive = activeStep === idx;
           return (
             <div
-              key={idx}
+              key={step.title}
               onClick={() => setActiveStep(idx)}
-              className={`p-3.5 rounded-xl border transition-all cursor-pointer ${
-                isCurrent
-                  ? 'bg-[#FF6A00]/15 border-[#FF6A00] text-white shadow-lg shadow-[#FF6A00]/10 scale-[1.02]'
-                  : isPassed
-                  ? 'bg-[#161B22] border-emerald-500/40 text-[#C9D1D9]'
-                  : 'bg-[#161B22] border-[#30363D] text-[#8B949E] hover:border-[#8B949E]'
+              className={`p-4 rounded-xl border text-left cursor-pointer transition-all duration-200 ${
+                isActive
+                  ? 'bg-[#151E27] border-[#FF6B53] shadow-lg shadow-[#FF6B53]/5 -translate-y-0.5'
+                  : 'bg-[#151E27]/40 border-white/5 opacity-70 hover:opacity-100'
               }`}
             >
               <div className="flex items-center justify-between mb-2">
-                <span className="font-mono text-[10px] font-bold px-1.5 py-0.5 rounded bg-[#21262D] text-[#FFA34D]">
-                  0{idx + 1}
+                <span className={`font-mono text-xs font-bold ${isActive ? 'text-[#FF6B53]' : 'text-[#7E8994]'}`}>
+                  0{idx + 1}.
                 </span>
-                {isPassed && <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />}
+                <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-white/5 text-[#C3CBD3]">
+                  {step.metric}
+                </span>
               </div>
-              <h4 className="font-bold text-xs text-white mb-1">{step.title}</h4>
-              <p className="text-[11px] text-[#8B949E] leading-relaxed mb-2">
-                {step.desc}
-              </p>
-              <div className="pt-2 border-t border-[#21262D] font-mono text-[10px] text-[#FFA34D] font-semibold">
-                {step.metric}
-              </div>
+              <h5 className="font-bold text-xs sm:text-sm text-[#FFFFFF] mb-1">{step.title}</h5>
+              <p className="text-[11px] text-[#7E8994] leading-relaxed">{step.desc}</p>
             </div>
           );
         })}
       </div>
 
-      {/* Active step explanation */}
-      <div className="bg-[#161B22] p-4 rounded-lg border border-[#21262D] flex items-start gap-3">
-        <Zap className="w-4 h-4 text-[#FF6A00] shrink-0 mt-0.5" />
-        <div className="space-y-1 text-xs">
-          <span className="font-mono font-bold text-white uppercase">
-            Engineering Focus at Step 0{activeStep + 1}:
-          </span>
-          <p className="text-[#C9D1D9] leading-relaxed">
-            {activeStep === 0 && 'Handling burst submissions from multiple college participants simultaneously.'}
-            {activeStep === 1 && 'Ensuring relational integrity between student accounts, contest IDs, and test-case verdicts.'}
-            {activeStep === 2 && 'Replacing unindexed relational queries with composite index scans on (contest_id, score, submission_time).'}
-            {activeStep === 3 && 'Delivering sub-second leaderboard ranking feedback across 1,000+ participating students.'}
-          </p>
-        </div>
+      <div className="p-3.5 rounded-xl bg-[#151E27] border border-white/6 flex items-center justify-between text-xs font-mono text-[#7E8994]">
+        <span>Pipeline: STUDENT → SUBMISSION → CONTEST → LEADERBOARD</span>
+        <span className="text-emerald-400 font-bold">1,000+ Active Students</span>
       </div>
     </div>
   );

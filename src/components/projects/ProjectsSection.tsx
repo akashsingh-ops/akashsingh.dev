@@ -1,29 +1,70 @@
-import React, { useState, useRef } from 'react';
-import { motion, useInView, useReducedMotion } from 'motion/react';
+import React, { useState, useRef, useEffect } from 'react';
+import { motion, AnimatePresence, useInView, useReducedMotion } from 'motion/react';
+import { projectsData, ProjectExtended } from '../../data/projects';
 import { Modal } from '../ui/Modal';
 import { CountUp } from '../ui/CountUp';
-import { ArrowUpRight, Github, ArrowRight, CheckCircle2, ShieldCheck, Zap, Users, Code, QrCode } from 'lucide-react';
+import { MimasaAiDiagram } from './MimasaAiDiagram';
+import { OceanMotionDiagram } from './OceanMotionDiagram';
+import { GeekSearchDiagram } from './GeekSearchDiagram';
+import { EazEaeDiagram } from './EazEaeDiagram';
+import {
+  ArrowUpRight,
+  Github,
+  ArrowRight,
+  CheckCircle2,
+  ShieldCheck,
+  Zap,
+  Users,
+  Code,
+  QrCode,
+  Network,
+  Sparkles,
+  Layers,
+  ChevronRight,
+  Database,
+  Search,
+  Building2,
+  Briefcase
+} from 'lucide-react';
 import {
   CinematicSection,
-  childItemVariant,
-  childItemScaleVariant,
-  childItemSlideLeftVariant,
-  childItemSlideRightVariant
+  childItemVariant
 } from '../ui/CinematicSection';
 
 const customEase = [0.22, 1, 0.36, 1] as const;
 
-export const ProjectsSection: React.FC = () => {
-  const [activeModalProject, setActiveModalProject] = useState<'geek-search' | 'eazeae' | null>(null);
-  const [activeGeekStep, setActiveGeekStep] = useState<number>(1);
-  const [activeEazEaeStep, setActiveEazEaeStep] = useState<number>(1);
+export type ProjectId = 'mimasa-ai' | 'geek-search' | 'oceanmotion' | 'eazeae';
+
+interface ProjectsSectionProps {
+  externalModalProject?: ProjectId | null;
+  onCloseExternalModal?: () => void;
+}
+
+export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
+  externalModalProject,
+  onCloseExternalModal
+}) => {
+  const [selectedProjectId, setSelectedProjectId] = useState<ProjectId>('mimasa-ai');
+  const [internalModalProject, setInternalModalProject] = useState<ProjectId | null>(null);
+
+  const activeModalProject = externalModalProject !== undefined && externalModalProject !== null
+    ? externalModalProject
+    : internalModalProject;
+
+  // When external modal triggers, also sync active tab
+  useEffect(() => {
+    if (externalModalProject) {
+      setSelectedProjectId(externalModalProject);
+    }
+  }, [externalModalProject]);
+
+  const handleCloseModal = () => {
+    setInternalModalProject(null);
+    onCloseExternalModal?.();
+  };
 
   const shouldReduceMotion = useReducedMotion();
-  const geekRef = useRef<HTMLDivElement>(null);
-  const eazRef = useRef<HTMLDivElement>(null);
-
-  const isGeekInView = useInView(geekRef, { margin: '-100px', once: false });
-  const isEazInView = useInView(eazRef, { margin: '-100px', once: false });
+  const currentProject = projectsData.find((p) => p.id === selectedProjectId) || projectsData[0];
 
   return (
     <CinematicSection
@@ -33,10 +74,10 @@ export const ProjectsSection: React.FC = () => {
       motionType="aperture"
       className="py-24 sm:py-36"
     >
-      <div className="max-w-5xl mx-auto px-6 sm:px-8 space-y-28 sm:space-y-36">
+      <div className="max-w-5xl mx-auto px-6 sm:px-8 space-y-16 sm:space-y-20">
         {/* Section Header */}
         <motion.div
-          className="space-y-4 max-w-2xl"
+          className="space-y-4 max-w-3xl"
           variants={shouldReduceMotion ? undefined : childItemVariant}
         >
           <div className="flex items-center gap-3 font-mono text-xs text-[#9A9FA8]">
@@ -46,239 +87,377 @@ export const ProjectsSection: React.FC = () => {
           </div>
 
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#F5F5F2] tracking-tight leading-tight">
-            Turning real problems into dependable software.
+            Turning complex systems into dependable software.
           </h2>
 
           <p className="text-base sm:text-lg text-[#9A9FA8] leading-relaxed">
-            Case studies grounded in actual user friction, database performance tuning, and scalable architecture.
+            Case studies grounded in backend architecture, graph databases, multi-tenant RBAC, enterprise search, and AI-driven automation.
           </p>
         </motion.div>
 
         {/* ========================================================================= */}
-        {/* PROJECT 1: GEEK-SEARCH (Subtle slide from left: translateX(-30px)) */}
+        {/* CLEAN PROJECT SELECTOR NAVIGATION */}
         {/* ========================================================================= */}
-        <motion.div
-          ref={geekRef}
-          className="space-y-8 p-6 sm:p-8 rounded-3xl bg-[#111418]/40 border border-white/6 hover:border-white/15 transition-all duration-300"
-          initial={shouldReduceMotion ? {} : { opacity: 0, x: -35 }}
-          animate={
-            shouldReduceMotion
-              ? { opacity: 1 }
-              : isGeekInView
-              ? { opacity: 1, x: 0 }
-              : { opacity: 0, x: -25 }
-          }
-          transition={{ duration: 0.7, ease: customEase }}
-          whileHover={{ y: -4, transition: { duration: 0.25 } }}
-        >
-          <div className="flex flex-wrap items-center justify-between gap-4">
-            <span className="text-xs font-mono uppercase tracking-widest text-[#FF7A18] font-bold">
-              01 // PLATFORM
-            </span>
-            <span className="text-xs font-mono text-[#666C75]">
-              Frontend & Database Architecture
-            </span>
+        <div className="space-y-4">
+          <div className="flex items-center justify-between text-xs font-mono text-[#666C75]">
+            <span className="uppercase tracking-widest text-[#FF7A18] font-bold">// Project Index</span>
+            <span>Click to switch project view</span>
           </div>
 
-          <div className="space-y-4">
-            <h3 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#F5F5F2] tracking-tight">
-              Geek-Search
-            </h3>
-            <p className="text-lg sm:text-xl font-medium text-[#9A9FA8] max-w-3xl">
-              Placement & Competitive Coding Platform built to help students access opportunities beyond the traditional curriculum.
-            </p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2.5 p-2 rounded-2xl bg-[#111418]/60 border border-white/6">
+            {projectsData.map((project, idx) => {
+              const isSelected = selectedProjectId === project.id;
+              const formattedNum = `0${idx + 1}`;
+
+              return (
+                <button
+                  key={project.id}
+                  onClick={() => setSelectedProjectId(project.id as ProjectId)}
+                  className={`p-3.5 sm:p-4 rounded-xl text-left transition-all duration-300 relative group ${
+                    isSelected
+                      ? 'bg-[#171B20] border border-[#FF7A18]/60 shadow-lg shadow-[#FF7A18]/5'
+                      : 'bg-[#0B0D0F]/70 border border-white/5 hover:border-white/15 opacity-70 hover:opacity-100'
+                  }`}
+                >
+                  {/* Top indicator */}
+                  <div className="flex items-center justify-between mb-2">
+                    <span className={`font-mono text-xs font-bold ${isSelected ? 'text-[#FF7A18]' : 'text-[#666C75]'}`}>
+                      {formattedNum} /
+                    </span>
+                    {project.company && (
+                      <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-white/5 text-[#9A9FA8]">
+                        {project.company}
+                      </span>
+                    )}
+                  </div>
+
+                  <h3 className={`font-mono font-bold text-sm sm:text-base tracking-tight transition-colors ${
+                    isSelected ? 'text-[#F5F5F2]' : 'text-[#9A9FA8] group-hover:text-[#F5F5F2]'
+                  }`}>
+                    {project.title.toUpperCase()}
+                  </h3>
+
+                  <p className="text-[11px] text-[#666C75] line-clamp-1 mt-1 font-mono">
+                    {project.architectureSubtitle || project.category}
+                  </p>
+
+                  {/* Active bottom glow bar */}
+                  {isSelected && (
+                    <motion.div
+                      layoutId="activeProjectIndicator"
+                      className="absolute bottom-0 left-3 right-3 h-[2px] bg-gradient-to-r from-transparent via-[#FF7A18] to-transparent"
+                      transition={{ duration: 0.4, ease: customEase }}
+                    />
+                  )}
+                </button>
+              );
+            })}
           </div>
+        </div>
 
-          {/* Key Facts Strip with Animated Count-Up */}
-          <div className="flex flex-wrap items-center gap-6 sm:gap-10 py-4 border-y border-white/8 font-mono text-sm">
-            <div>
-              <span className="text-xl sm:text-2xl font-bold text-[#F5F5F2] block">
-                <CountUp end={1000} suffix="+" duration={1.5} />
-              </span>
-              <span className="text-xs text-[#666C75]">Students Engaged</span>
-            </div>
-            <div className="w-[1px] h-8 bg-white/10" />
-            <div>
-              <span className="text-xl sm:text-2xl font-bold text-[#F5F5F2] block">
-                <CountUp end={10000} suffix="+" duration={1.8} />
-              </span>
-              <span className="text-xs text-[#666C75]">Code Submissions</span>
-            </div>
-            <div className="w-[1px] h-8 bg-white/10" />
-            <div>
-              <span className="text-xl sm:text-2xl font-bold text-[#FF7A18] block">
-                <CountUp end={40} prefix="~" suffix="%" duration={1.6} />
-              </span>
-              <span className="text-xs text-[#666C75]">Latency Reduction</span>
-            </div>
-          </div>
+        {/* ========================================================================= */}
+        {/* ACTIVE PROJECT HERO SHOWCASE (Cinematic 500-700ms Transition) */}
+        {/* ========================================================================= */}
+        <div className="relative min-h-[520px]">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={currentProject.id}
+              initial={shouldReduceMotion ? { opacity: 1 } : { opacity: 0, y: 16, scale: 0.985 }}
+              animate={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, y: 0, scale: 1 }}
+              exit={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, y: -12, scale: 0.985 }}
+              transition={{ duration: 0.55, ease: customEase }}
+              className="p-6 sm:p-9 rounded-3xl bg-[#111418]/50 border border-white/8 hover:border-white/15 transition-all duration-300 space-y-8"
+            >
+              {/* Card Meta Header */}
+              <div className="flex flex-wrap items-center justify-between gap-3 border-b border-white/6 pb-4">
+                <div className="flex items-center gap-3">
+                  <span className="font-mono text-xs text-[#FF7A18] font-bold px-2 py-0.5 rounded bg-[#FF7A18]/10 border border-[#FF7A18]/20">
+                    {projectsData.findIndex((p) => p.id === currentProject.id) + 1 < 10
+                      ? `0${projectsData.findIndex((p) => p.id === currentProject.id) + 1}`
+                      : projectsData.findIndex((p) => p.id === currentProject.id) + 1}{' '}
+                    // {currentProject.title.toUpperCase()}
+                  </span>
+                  {currentProject.company && (
+                    <span className="text-xs font-mono text-[#9A9FA8] flex items-center gap-1.5">
+                      <Building2 className="w-3.5 h-3.5 text-[#FF7A18]" />
+                      <span>{currentProject.company}</span>
+                    </span>
+                  )}
+                </div>
 
-          {/* Minimal Interactive 3-Node Flow */}
-          <div className="p-6 rounded-2xl bg-[#111418] border border-white/8 space-y-4">
-            <div className="text-xs font-mono uppercase tracking-wider text-[#666C75] flex items-center justify-between">
-              <span>// Architecture Pipeline</span>
-              <span className="text-[11px] text-[#9A9FA8]">Click step to inspect</span>
-            </div>
+                <span className="text-xs font-mono text-[#666C75]">
+                  {currentProject.architectureSubtitle}
+                </span>
+              </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-              {[
-                { step: '01', title: 'SUBMISSION', stat: '10,000+ submissions', detail: 'Algorithmic contest code captured at frontend edge' },
-                { step: '02', title: 'PROCESS', stat: 'Frontend + Database', detail: 'Structured submission processing & schema optimization' },
-                { step: '03', title: 'LEADERBOARD', stat: '~40% speedup', detail: 'Low-latency ranked student contest standings' }
-              ].map((item, idx) => {
-                const isSelected = activeGeekStep === idx;
-                return (
-                  <button
-                    key={item.step}
-                    onClick={() => setActiveGeekStep(idx)}
-                    className={`p-4 rounded-xl text-left border transition-all duration-200 ${
-                      isSelected
-                        ? 'bg-[#171B20] border-[#FF7A18]/50 shadow-lg shadow-[#FF7A18]/5'
-                        : 'bg-[#0B0D0F] border-white/6 hover:border-white/15'
-                    }`}
-                  >
-                    <div className="flex items-center justify-between mb-1.5">
-                      <span className="text-[10px] font-mono text-[#666C75]">{item.step}</span>
-                      <span className="text-xs font-mono font-bold text-[#FF7A18]">{item.stat}</span>
+              {/* Title & Tagline */}
+              <div className="space-y-3">
+                <h3 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#F5F5F2] tracking-tight">
+                  {currentProject.title}
+                </h3>
+                <p className="text-lg sm:text-xl font-medium text-[#9A9FA8] max-w-3xl leading-relaxed">
+                  {currentProject.tagline}
+                </p>
+              </div>
+
+              {/* Key Quick Facts Strip */}
+              <div className="flex flex-wrap items-center gap-6 sm:gap-10 py-4 border-y border-white/8 font-mono text-sm">
+                {currentProject.quickFacts.map((fact, idx) => (
+                  <React.Fragment key={idx}>
+                    <div>
+                      <span className="text-xl sm:text-2xl font-bold text-[#F5F5F2] block">
+                        {fact.stat}
+                      </span>
+                      <span className="text-xs text-[#666C75]">{fact.label}</span>
                     </div>
-                    <h4 className="text-sm font-bold text-[#F5F5F2] font-mono mb-1">{item.title}</h4>
-                    <p className="text-xs text-[#9A9FA8] leading-snug">{item.detail}</p>
-                  </button>
-                );
-              })}
-            </div>
-          </div>
+                    {idx < currentProject.quickFacts.length - 1 && (
+                      <div className="w-[1px] h-8 bg-white/10 hidden sm:block" />
+                    )}
+                  </React.Fragment>
+                ))}
+              </div>
 
-          {/* CTA Trigger */}
-          <div className="flex items-center gap-4">
-            <button
-              onClick={() => setActiveModalProject('geek-search')}
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-[#171B20] hover:bg-white/10 text-sm font-medium text-[#F5F5F2] border border-white/10 transition-colors"
-            >
-              <span>Explore case study</span>
-              <ArrowUpRight className="w-4 h-4 text-[#FF7A18]" />
-            </button>
-          </div>
-        </motion.div>
+              {/* Project Signature Visual Component */}
+              <div className="space-y-2">
+                {currentProject.id === 'mimasa-ai' && <MimasaAiDiagram />}
+                {currentProject.id === 'oceanmotion' && <OceanMotionDiagram />}
+                {currentProject.id === 'geek-search' && <GeekSearchDiagram />}
+                {currentProject.id === 'eazeae' && <EazEaeDiagram />}
+              </div>
 
-        {/* ========================================================================= */}
-        {/* PROJECT 2: EAZEAE (Subtle slide from right: translateX(30px)) */}
-        {/* ========================================================================= */}
-        <motion.div
-          ref={eazRef}
-          className="space-y-8 pt-12 border-t border-white/8 p-6 sm:p-8 rounded-3xl bg-[#111418]/40 border border-white/6 hover:border-white/15 transition-all duration-300"
-          initial={shouldReduceMotion ? {} : { opacity: 0, x: 35 }}
-          animate={
-            shouldReduceMotion
-              ? { opacity: 1 }
-              : isEazInView
-              ? { opacity: 1, x: 0 }
-              : { opacity: 0, x: 25 }
-          }
-          transition={{ duration: 0.7, ease: customEase }}
-          whileHover={{ y: -4, transition: { duration: 0.25 } }}
-        >
-          <div className="flex flex-wrap items-center justify-between gap-4">
-            <span className="text-xs font-mono uppercase tracking-widest text-[#FF7A18] font-bold">
-              02 // MOBILITY & ACCESS
-            </span>
-            <span className="text-xs font-mono text-[#666C75]">
-              Full-Stack & Backend Systems
-            </span>
-          </div>
+              {/* Primary Call to Action */}
+              <div className="flex flex-wrap items-center justify-between gap-4 pt-2">
+                <button
+                  onClick={() => setInternalModalProject(currentProject.id as ProjectId)}
+                  className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-[#171B20] hover:bg-[#FF7A18] text-sm font-semibold text-[#F5F5F2] hover:text-[#090B0D] border border-white/15 hover:border-[#FF7A18] transition-all duration-200 shadow-md group"
+                >
+                  <span>Explore case study</span>
+                  <ArrowUpRight className="w-4 h-4 text-[#FF7A18] group-hover:text-[#090B0D] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                </button>
 
-          <div className="space-y-4">
-            <h3 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#F5F5F2] tracking-tight">
-              EazEae
-            </h3>
-            <p className="text-lg sm:text-xl font-medium text-[#9A9FA8] max-w-3xl">
-              Digital tourism platform using a QR-based approach to make visitor entry and site information more accessible.
-            </p>
-          </div>
-
-          {/* Key Facts Strip with Animated Count-Up */}
-          <div className="flex flex-wrap items-center gap-6 sm:gap-10 py-4 border-y border-white/8 font-mono text-sm">
-            <div>
-              <span className="text-xl sm:text-2xl font-bold text-[#F5F5F2] block">
-                <CountUp end={500} suffix="+" duration={1.5} />
-              </span>
-              <span className="text-xs text-[#666C75]">Daily Requests</span>
-            </div>
-            <div className="w-[1px] h-8 bg-white/10" />
-            <div>
-              <span className="text-xl sm:text-2xl font-bold text-[#FF7A18] block">
-                <CountUp end={75} prefix="~" suffix="%" duration={1.6} />
-              </span>
-              <span className="text-xs text-[#666C75]">Faster Responses</span>
-            </div>
-            <div className="w-[1px] h-8 bg-white/10" />
-            <div>
-              <span className="text-xl sm:text-2xl font-bold text-[#F5F5F2] block">
-                <CountUp end={100} suffix="%" duration={1.4} />
-              </span>
-              <span className="text-xs text-[#666C75]">Duplicate Prevention</span>
-            </div>
-          </div>
-
-          {/* Minimal Interactive QR Flow: SCAN -> VALIDATE -> ENTRY */}
-          <div className="p-6 rounded-2xl bg-[#111418] border border-white/8 space-y-4">
-            <div className="text-xs font-mono uppercase tracking-wider text-[#666C75] flex items-center justify-between">
-              <span>// Gate Validation Flow</span>
-              <span className="text-[11px] text-[#9A9FA8]">Click step to inspect</span>
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-              {[
-                { step: '01', title: 'SCAN', stat: 'QR Interface', detail: 'Visitor presents encrypted digital token at regional heritage gate' },
-                { step: '02', title: 'VALIDATE', stat: '<50ms Lookup', detail: 'Concurrent token validation & query indexing to verify access' },
-                { step: '03', title: 'ENTRY', stat: 'Atomic Commit', detail: 'Zero duplicate entries with instant site check-in' }
-              ].map((item, idx) => {
-                const isSelected = activeEazEaeStep === idx;
-                return (
-                  <button
-                    key={item.step}
-                    onClick={() => setActiveEazEaeStep(idx)}
-                    className={`p-4 rounded-xl text-left border transition-all duration-200 ${
-                      isSelected
-                        ? 'bg-[#171B20] border-[#FF7A18]/50 shadow-lg shadow-[#FF7A18]/5'
-                        : 'bg-[#0B0D0F] border-white/6 hover:border-white/15'
-                    }`}
+                {currentProject.githubUrl && (
+                  <a
+                    href={currentProject.githubUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg bg-transparent hover:bg-white/5 text-xs font-mono text-[#9A9FA8] hover:text-[#F5F5F2] border border-white/8 transition-colors"
                   >
-                    <div className="flex items-center justify-between mb-1.5">
-                      <span className="text-[10px] font-mono text-[#666C75]">{item.step}</span>
-                      <span className="text-xs font-mono font-bold text-[#FF7A18]">{item.stat}</span>
-                    </div>
-                    <h4 className="text-sm font-bold text-[#F5F5F2] font-mono mb-1">{item.title}</h4>
-                    <p className="text-xs text-[#9A9FA8] leading-snug">{item.detail}</p>
-                  </button>
-                );
-              })}
-            </div>
+                    <Github className="w-3.5 h-3.5" />
+                    <span>Source Repository</span>
+                    <ArrowUpRight className="w-3 h-3 text-[#666C75]" />
+                  </a>
+                )}
+              </div>
+            </motion.div>
+          </AnimatePresence>
+        </div>
+
+        {/* ========================================================================= */}
+        {/* SELECTED WORK PROGRESSION RELATIONSHIP */}
+        {/* ========================================================================= */}
+        <div className="p-6 rounded-2xl bg-[#111418]/40 border border-white/6 space-y-4">
+          <div className="flex items-center justify-between text-xs font-mono text-[#666C75]">
+            <span className="uppercase tracking-wider text-[#FF7A18] font-bold">// Engineering Scope Progression</span>
+            <span>Real-World → Scale & AI</span>
           </div>
 
-          {/* CTA Triggers */}
-          <div className="flex flex-wrap items-center gap-4">
-            <button
-              onClick={() => setActiveModalProject('eazeae')}
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-[#171B20] hover:bg-white/10 text-sm font-medium text-[#F5F5F2] border border-white/10 transition-colors"
-            >
-              <span>Explore case study</span>
-              <ArrowUpRight className="w-4 h-4 text-[#FF7A18]" />
-            </button>
-
-            <a
-              href="https://github.com/akashsingh-ops/EazEae_MajorProject"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg bg-transparent hover:bg-white/5 text-xs font-mono text-[#9A9FA8] hover:text-[#F5F5F2] border border-white/8 transition-colors"
-            >
-              <Github className="w-3.5 h-3.5" />
-              <span>Source Repository</span>
-              <ArrowUpRight className="w-3 h-3 text-[#666C75]" />
-            </a>
+          <div className="grid grid-cols-1 sm:grid-cols-4 gap-3 font-mono text-xs">
+            {[
+              { id: 'eazeae', title: '04. EAZEAE', desc: 'Full-stack + Real-world access validation' },
+              { id: 'geek-search', title: '02. GEEK-SEARCH', desc: 'Builder + Personal initiative & 1,000+ students' },
+              { id: 'oceanmotion', title: '03. OCEANMOTION', desc: 'Deep Backend + Graph DB + 70+ APIs + RBAC' },
+              { id: 'mimasa-ai', title: '01. MIMASA AI', desc: 'Enterprise Data + Search + Multi-Tenant + AI' }
+            ].map((prog) => (
+              <button
+                key={prog.id}
+                onClick={() => setSelectedProjectId(prog.id as ProjectId)}
+                className={`p-3 rounded-xl text-left border transition-all ${
+                  selectedProjectId === prog.id
+                    ? 'bg-[#171B20] border-[#FF7A18]/40 text-[#F5F5F2]'
+                    : 'bg-[#0B0D0F] border-white/5 text-[#9A9FA8] hover:border-white/15'
+                }`}
+              >
+                <div className="font-bold text-[#FF7A18] text-[11px] mb-1">{prog.title}</div>
+                <div className="text-[10px] text-[#9A9FA8] leading-snug">{prog.desc}</div>
+              </button>
+            ))}
           </div>
-        </motion.div>
+        </div>
       </div>
+
+      {/* ========================================================================= */}
+      {/* CASE STUDY MODAL: MIMASA AI */}
+      {/* ========================================================================= */}
+      {activeModalProject === 'mimasa-ai' && (
+        <Modal
+          isOpen={true}
+          onClose={handleCloseModal}
+          title="Mimasa AI Case Study"
+          subtitle="AI-Powered Enterprise Data Analytics & Search (Xaigi Technology)"
+          maxWidth="3xl"
+        >
+          <div className="space-y-6 text-[#9A9FA8] leading-relaxed text-sm sm:text-base">
+            {/* The Problem */}
+            <div className="p-5 rounded-2xl bg-[#0B0D0F] border border-white/8 space-y-3">
+              <span className="text-[11px] font-mono text-[#FF7A18] uppercase font-bold tracking-wider block">
+                The Problem
+              </span>
+              <p className="text-base sm:text-lg font-bold text-[#F5F5F2]">
+                "Data exists. But it lives in silos — across systems, teams, and formats."
+              </p>
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 font-mono text-xs text-[#9A9FA8] pt-1">
+                <div className="p-2.5 rounded-lg bg-white/5 border border-white/6 text-center">
+                  <span className="text-[#FF7A18] block font-bold">01</span>
+                  <span>Insights are delayed.</span>
+                </div>
+                <div className="p-2.5 rounded-lg bg-white/5 border border-white/6 text-center">
+                  <span className="text-[#FF7A18] block font-bold">02</span>
+                  <span>Decisions are reactive.</span>
+                </div>
+                <div className="p-2.5 rounded-lg bg-white/5 border border-white/6 text-center">
+                  <span className="text-[#FF7A18] block font-bold">03</span>
+                  <span>Execution is manual.</span>
+                </div>
+              </div>
+            </div>
+
+            {/* What Mimasa AI Does */}
+            <div className="space-y-2">
+              <h4 className="text-base font-bold text-[#F5F5F2] font-mono">What Mimasa AI Does</h4>
+              <p>
+                Mimasa AI connects to the systems organizations already run, reconciles data into governed models, lets users question that data in plain language, and helps carry decisions into source systems through automation agents.
+              </p>
+            </div>
+
+            {/* Akash's Role (Honest & Explicit) */}
+            <div className="p-4 rounded-xl bg-[#171B20] border border-[#FF7A18]/30 space-y-2">
+              <span className="text-[11px] font-mono uppercase tracking-wider text-[#FF7A18] font-bold block">
+                My Role // Backend + Frontend Engineering Support
+              </span>
+              <p className="text-[#F5F5F2] text-sm">
+                Worked closely with the <strong>GenAI and Data Science teams</strong>, providing backend and frontend engineering support across data analytics, search, organization management, notifications, onboarding, and AI-powered workflows.
+              </p>
+            </div>
+
+            {/* Interactive Architecture & Diagram Embed */}
+            <div className="space-y-2">
+              <span className="text-xs font-mono text-[#666C75] uppercase tracking-wider block">
+                // Interactive Contribution Exploration
+              </span>
+              <MimasaAiDiagram />
+            </div>
+
+            {/* Measurable Outcomes */}
+            <div className="p-4 rounded-xl bg-[#0B0D0F] border border-white/8 space-y-3">
+              <span className="text-[11px] font-mono uppercase tracking-wider text-[#FF7A18] font-bold block">
+                Measurable Impact & Results
+              </span>
+              <ul className="space-y-2 font-mono text-xs sm:text-sm text-[#F5F5F2]">
+                <li className="flex items-center gap-2">
+                  <span className="text-[#FF7A18]">✓</span>
+                  <span>&lt;100ms fuzzy and prefix discovery across data sources, dashboards, and charts</span>
+                </li>
+                <li className="flex items-center gap-2">
+                  <span className="text-[#FF7A18]">✓</span>
+                  <span>6-step signal onboarding pipeline capturing profile signals for GenAI recommendations</span>
+                </li>
+                <li className="flex items-center gap-2">
+                  <span className="text-[#FF7A18]">✓</span>
+                  <span>Strict multi-tenant organization workspace data isolation preventing cross-tenant leakage</span>
+                </li>
+                <li className="flex items-center gap-2">
+                  <span className="text-[#FF7A18]">✓</span>
+                  <span>Decoupled Celery and Django Signal notification pipeline handling high event volume</span>
+                </li>
+              </ul>
+            </div>
+
+            {/* Key Takeaway */}
+            <div className="text-xs font-mono text-[#9A9FA8] pt-2 border-t border-white/6">
+              <strong className="text-[#F5F5F2]">What I Learned:</strong> High-performance backend pipelines, clean data schemas, and strict boundary isolation are the essential bedrock required before any GenAI layer can produce reliable insights.
+            </div>
+          </div>
+        </Modal>
+      )}
+
+      {/* ========================================================================= */}
+      {/* CASE STUDY MODAL: OCEANMOTION */}
+      {/* ========================================================================= */}
+      {activeModalProject === 'oceanmotion' && (
+        <Modal
+          isOpen={true}
+          onClose={handleCloseModal}
+          title="OceanMotion Case Study"
+          subtitle="Enterprise Cloud Analytics Platform (Xaigi Technology)"
+          maxWidth="3xl"
+        >
+          <div className="space-y-6 text-[#9A9FA8] leading-relaxed text-sm sm:text-base">
+            {/* Primary Story */}
+            <div className="p-5 rounded-2xl bg-[#0B0D0F] border border-white/8 space-y-3">
+              <span className="text-[11px] font-mono text-[#FF7A18] uppercase font-bold tracking-wider block">
+                Primary Mission
+              </span>
+              <p className="text-base sm:text-lg font-bold text-[#F5F5F2]">
+                Turning a complex dataset lifecycle into a governed publishing and analytics platform.
+              </p>
+              <div className="p-3 rounded-lg bg-white/5 border border-white/6 font-mono text-xs text-[#9A9FA8]">
+                UPLOAD → LICENSING → PRICING → ACCESS CONTROL → PUBLICATION → ANALYTICS
+              </div>
+            </div>
+
+            {/* Akash's Role */}
+            <div className="space-y-2">
+              <h4 className="text-base font-bold text-[#F5F5F2] font-mono">Backend Architecture & Core Contributions</h4>
+              <p>
+                Engineered 70+ production REST APIs covering dataset ingestion, metadata schemas, licensing, subscription tiers, and access control. Represented connected entities in Neo4j (USER → GROUP → DATASET → CHART → DASHBOARD) and authored 35+ complex Cypher queries.
+              </p>
+            </div>
+
+            {/* Interactive Graph & RBAC Showcase */}
+            <div className="space-y-2">
+              <span className="text-xs font-mono text-[#666C75] uppercase tracking-wider block">
+                // Neo4j & RBAC Architecture Engine
+              </span>
+              <OceanMotionDiagram />
+            </div>
+
+            {/* Group Sharing & Permission Leakage Investigation */}
+            <div className="p-4 rounded-xl bg-[#171B20] border border-[#FF7A18]/30 space-y-2">
+              <span className="text-[11px] font-mono uppercase tracking-wider text-[#FF7A18] font-bold block">
+                When Permissions Get Complicated // Root-Cause Debugging
+              </span>
+              <p className="text-[#F5F5F2] text-xs sm:text-sm">
+                Diagnosed and resolved permission leakage and high traversal latency on shared nested dashboards by refactoring recursive Cypher queries with explicit directional constraints and group-scoping predicates — resulting in correct RBAC enforcement and a <strong>30–40% query execution improvement</strong>.
+              </p>
+            </div>
+
+            {/* Measurable Outcomes */}
+            <div className="p-4 rounded-xl bg-[#0B0D0F] border border-white/8 space-y-3">
+              <span className="text-[11px] font-mono uppercase tracking-wider text-[#FF7A18] font-bold block">
+                Engineering Metrics
+              </span>
+              <ul className="space-y-2 font-mono text-xs sm:text-sm text-[#F5F5F2]">
+                <li className="flex items-center gap-2">
+                  <span className="text-[#FF7A18]">✓</span>
+                  <span>70+ REST APIs built across ingestion, licensing, subscriptions, and access control</span>
+                </li>
+                <li className="flex items-center gap-2">
+                  <span className="text-[#FF7A18]">✓</span>
+                  <span>35+ complex Cypher queries written and optimized</span>
+                </li>
+                <li className="flex items-center gap-2">
+                  <span className="text-[#FF7A18]">✓</span>
+                  <span>30–40% query execution speed improvement through indexing and pattern rewrites</span>
+                </li>
+                <li className="flex items-center gap-2">
+                  <span className="text-[#FF7A18]">✓</span>
+                  <span>Group Sharing / RBAC module architected from scratch with Apache Superset permissions</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </Modal>
+      )}
 
       {/* ========================================================================= */}
       {/* CASE STUDY MODAL: GEEK-SEARCH */}
@@ -286,9 +465,9 @@ export const ProjectsSection: React.FC = () => {
       {activeModalProject === 'geek-search' && (
         <Modal
           isOpen={true}
-          onClose={() => setActiveModalProject(null)}
+          onClose={handleCloseModal}
           title="Geek-Search Case Study"
-          subtitle="Placement & Coding Platform"
+          subtitle="Placement & Competitive Coding Platform"
           maxWidth="2xl"
         >
           <div className="space-y-6 text-[#9A9FA8] leading-relaxed text-sm sm:text-base">
@@ -297,7 +476,7 @@ export const ProjectsSection: React.FC = () => {
                 Origin & Context
               </span>
               <p className="text-[#F5F5F2]">
-                Akash noticed students spending college primarily on traditional curriculum with limited exposure to placement preparation, coding contests, and industry opportunities. Geek-Search was created to bridge this gap.
+                Coming from a small-town background, Akash saw that many students lacked exposure to placement-oriented preparation, coding contests, and industry expectations. He built Geek-Search to help bridge that gap.
               </p>
             </div>
 
@@ -309,9 +488,9 @@ export const ProjectsSection: React.FC = () => {
             </div>
 
             <div className="space-y-2">
-              <h4 className="text-base font-bold text-[#F5F5F2]">Build & Contribution</h4>
+              <h4 className="text-base font-bold text-[#F5F5F2]">Role & Contribution (Frontend + Database)</h4>
               <p>
-                Akash contributed across frontend development and database architecture, structuring queries and state management so students could submit code and track live rankings seamlessly during active campus coding contests.
+                Contributed across <strong>frontend engineering and database design & optimization</strong>, structuring queries and state management so students could submit code and track live rankings seamlessly during active campus coding contests.
               </p>
             </div>
 
@@ -344,7 +523,7 @@ export const ProjectsSection: React.FC = () => {
       {activeModalProject === 'eazeae' && (
         <Modal
           isOpen={true}
-          onClose={() => setActiveModalProject(null)}
+          onClose={handleCloseModal}
           title="EazEae Case Study"
           subtitle="Digital Tourism & Access Platform"
           maxWidth="2xl"

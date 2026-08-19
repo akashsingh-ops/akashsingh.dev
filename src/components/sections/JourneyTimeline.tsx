@@ -3,7 +3,21 @@ import { motion, useScroll, useTransform, useInView, useReducedMotion } from 'mo
 import { experienceData } from '../../data/experience';
 import { ExperienceItem } from '../../types';
 import { Drawer } from '../ui/Drawer';
-import { ArrowUpRight, ChevronRight, CheckCircle2, Database, Server, Zap, Cpu, Sparkles } from 'lucide-react';
+import {
+  ArrowUpRight,
+  ChevronRight,
+  CheckCircle2,
+  Database,
+  Server,
+  Zap,
+  Cpu,
+  Sparkles,
+  Network,
+  Share2,
+  Users,
+  Layers,
+  ArrowRight
+} from 'lucide-react';
 import {
   CinematicSection,
   childItemVariant
@@ -63,7 +77,7 @@ export const JourneyTimeline: React.FC = () => {
           </h2>
 
           <p className="text-base sm:text-lg text-[#9A9FA8] leading-relaxed">
-            From enterprise user interfaces to backend APIs, graph databases, and data automation pipelines.
+            From enterprise user interfaces to backend APIs, graph databases, multi-tenant RBAC, and data automation pipelines.
           </p>
         </motion.div>
 
@@ -116,7 +130,7 @@ export const JourneyTimeline: React.FC = () => {
 
               {/* Branching SVG Horizontal Connectors to Timeline Milestones */}
               {experienceData.map((_, idx) => {
-                const yPos = 35 + idx * 300; // Estimated normalized anchors
+                const yPos = 35 + idx * 280;
                 return (
                   <g key={idx}>
                     <motion.path
@@ -162,7 +176,7 @@ export const JourneyTimeline: React.FC = () => {
                   onClick={() => setSelectedExp(exp)}
                   className="w-full p-6 sm:p-7 rounded-2xl bg-[#111418] border border-white/6 hover:border-white/20 hover:bg-[#171B20]/70 transition-all duration-200 text-left flex flex-col sm:flex-row sm:items-center justify-between gap-4 group"
                 >
-                  <div className="space-y-1.5">
+                  <div className="space-y-2">
                     <div className="flex flex-wrap items-center gap-2.5">
                       <span className="font-mono text-xs text-[#FF7A18] font-bold">
                         {exp.period.split('–')[0].trim()}
@@ -176,13 +190,18 @@ export const JourneyTimeline: React.FC = () => {
                           Current
                         </span>
                       )}
+                      {exp.id === 'xaigi' && (
+                        <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-[#FF7A18]/15 border border-[#FF7A18]/30 text-[#FF7A18]">
+                          OceanMotion & Mimasa AI
+                        </span>
+                      )}
                     </div>
 
                     <div className="text-sm text-[#9A9FA8] font-mono">
                       {exp.role}
                     </div>
 
-                    <p className="text-xs sm:text-sm text-[#666C75] line-clamp-1 max-w-2xl pt-1">
+                    <p className="text-xs sm:text-sm text-[#666C75] line-clamp-1 max-w-2xl pt-0.5">
                       {exp.themes.join(' · ')}
                     </p>
                   </div>
@@ -228,7 +247,108 @@ export const JourneyTimeline: React.FC = () => {
               ))}
             </div>
 
-            {/* Interactive Dell Pipeline Showcase with animated SVG path connection */}
+            {/* XAIGI TECHNOLOGY SPECIAL CHAPTER */}
+            {selectedExp.id === 'xaigi' && (
+              <div className="space-y-5 p-4 rounded-2xl bg-[#0B0D0F] border border-white/8">
+                {/* Major Projects built at Xaigi */}
+                <div className="space-y-2">
+                  <span className="text-[11px] font-mono text-[#FF7A18] uppercase tracking-wider font-bold block">
+                    // Major Systems Built at Xaigi
+                  </span>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 font-mono text-xs">
+                    <div className="p-3 rounded-xl bg-[#111418] border border-white/6 space-y-1">
+                      <div className="flex items-center justify-between">
+                        <span className="font-bold text-[#F5F5F2]">01. OCEANMOTION</span>
+                        <span className="text-[10px] text-[#FF7A18]">GRAPH / RBAC</span>
+                      </div>
+                      <p className="text-[11px] text-[#9A9FA8] leading-tight">
+                        Dataset publishing platform, 70+ REST APIs, Neo4j 35+ Cypher queries, Apache Superset charts.
+                      </p>
+                    </div>
+
+                    <div className="p-3 rounded-xl bg-[#111418] border border-white/6 space-y-1">
+                      <div className="flex items-center justify-between">
+                        <span className="font-bold text-[#F5F5F2]">02. MIMASA AI</span>
+                        <span className="text-[10px] text-[#FF7A18]">SEARCH / AI</span>
+                      </div>
+                      <p className="text-[11px] text-[#9A9FA8] leading-tight">
+                        &lt;100ms intelligent search, tenant workspaces, 6-step onboarding, Django signals & Celery.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* ENGINEERING ACROSS TEAMS VISUALIZATION */}
+                <div className="space-y-3 p-4 rounded-xl bg-[#111418] border border-white/6">
+                  <div className="flex items-center justify-between font-mono text-xs">
+                    <span className="text-[#F5F5F2] font-bold uppercase tracking-wider flex items-center gap-2">
+                      <Users className="w-3.5 h-3.5 text-[#FF7A18]" />
+                      ENGINEERING ACROSS TEAMS
+                    </span>
+                    <span className="text-[10px] text-[#666C75]">Cross-functional</span>
+                  </div>
+
+                  {/* Topology Diagram */}
+                  <div className="p-3 rounded-lg bg-[#0B0D0F] border border-white/5 font-mono text-xs space-y-3 text-center">
+                    <div className="inline-block px-3 py-1 rounded bg-[#FF7A18]/20 border border-[#FF7A18]/40 text-[#FF7A18] font-bold">
+                      AKASH SINGH
+                    </div>
+                    <div className="text-white/20">│</div>
+                    <div className="grid grid-cols-3 gap-2 text-[11px]">
+                      <div className="p-1.5 rounded bg-white/5 border border-white/8 text-[#F5F5F2]">
+                        Backend
+                      </div>
+                      <div className="p-1.5 rounded bg-white/5 border border-white/8 text-[#F5F5F2]">
+                        Frontend
+                      </div>
+                      <div className="p-1.5 rounded bg-white/5 border border-white/8 text-[#F5F5F2]">
+                        APIs
+                      </div>
+                    </div>
+                    <div className="text-white/20">│</div>
+                    <div className="grid grid-cols-2 gap-2 text-[11px]">
+                      <div className="p-2 rounded bg-[#171B20] border border-[#FF7A18]/30 text-[#FF7A18] font-semibold">
+                        GenAI Team
+                      </div>
+                      <div className="p-2 rounded bg-[#171B20] border border-emerald-500/30 text-emerald-400 font-semibold">
+                        Data Science Team
+                      </div>
+                    </div>
+                  </div>
+
+                  <p className="text-xs text-[#9A9FA8] font-mono leading-relaxed">
+                    Worked with <strong>GenAI and Data Science teams</strong> while providing backend and frontend engineering support across analytics, search, and workflows.
+                  </p>
+                </div>
+
+                {/* Structured Tech Stack for Xaigi */}
+                <div className="space-y-2 font-mono text-xs">
+                  <span className="text-[11px] uppercase tracking-wider text-[#666C75] block">
+                    // Technology Stack Organization
+                  </span>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                    <div className="p-2.5 rounded-lg bg-[#111418] border border-white/5">
+                      <span className="text-[10px] text-[#FF7A18] font-bold block mb-1">BACKEND</span>
+                      <span className="text-[#F5F5F2]">Python · Django · Django REST Framework</span>
+                    </div>
+                    <div className="p-2.5 rounded-lg bg-[#111418] border border-white/5">
+                      <span className="text-[10px] text-[#FF7A18] font-bold block mb-1">GRAPH / DATA</span>
+                      <span className="text-[#F5F5F2]">Neo4j · Cypher · Elasticsearch</span>
+                    </div>
+                    <div className="p-2.5 rounded-lg bg-[#111418] border border-white/5">
+                      <span className="text-[10px] text-[#FF7A18] font-bold block mb-1">FRONTEND</span>
+                      <span className="text-[#F5F5F2]">React.js · JavaScript</span>
+                    </div>
+                    <div className="p-2.5 rounded-lg bg-[#111418] border border-white/5">
+                      <span className="text-[10px] text-[#FF7A18] font-bold block mb-1">AI-ASSISTED DEV</span>
+                      <span className="text-[#F5F5F2]">Codium · Tabnine</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* Interactive Dell Pipeline Showcase */}
             {selectedExp.id === 'dell' && (
               <div className="space-y-4 p-4 rounded-xl bg-[#0B0D0F] border border-white/8 relative overflow-hidden">
                 <div className="flex items-center justify-between">
@@ -341,4 +461,3 @@ export const JourneyTimeline: React.FC = () => {
     </CinematicSection>
   );
 };
-
