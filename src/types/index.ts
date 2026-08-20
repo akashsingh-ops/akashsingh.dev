@@ -18,6 +18,11 @@ export interface Project {
   impact: string[];
   whatILearned: string;
   githubUrl?: string;
+  liveUrl?: string;
+  externalLink?: {
+    url: string;
+    label: string;
+  };
   featured: boolean;
 }
 

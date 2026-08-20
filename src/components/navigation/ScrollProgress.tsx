@@ -14,8 +14,9 @@ const stages: Stage[] = [
   { id: 'journey', number: '04', name: 'Journey' },
   { id: 'philosophy', number: '05', name: 'Thinking' },
   { id: 'skills', number: '06', name: 'Stack' },
-  { id: 'devlore', number: '07', name: 'DEVLORE' },
-  { id: 'contact', number: '08', name: 'Contact' }
+  { id: 'playground', number: '07', name: 'Playground' },
+  { id: 'devlore', number: '08', name: 'DEVLORE' },
+  { id: 'contact', number: '09', name: 'Contact' }
 ];
 
 export const ScrollProgress: React.FC = () => {

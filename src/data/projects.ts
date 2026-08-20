@@ -93,6 +93,11 @@ export const projectsData: ProjectExtended[] = [
     ],
     whatILearned:
       'Working closely with GenAI and Data Science teams taught me how high-performance backend pipelines, clean data contracts, and strict tenant boundaries are the essential foundation for dependable AI-driven workflows.',
+    liveUrl: 'https://app.mimasa.ai/',
+    externalLink: {
+      url: 'https://app.mimasa.ai/',
+      label: 'View Live Project ↗'
+    },
     featured: true,
     story: {
       problemStatement: 'Data exists. But it lives in silos — across systems, teams, and formats.',
@@ -343,6 +348,10 @@ export const projectsData: ProjectExtended[] = [
     whatILearned:
       'Diagnosing concurrency issues requires looking beneath surface symptoms. What seemed like an API speed problem was actually a database transaction and validation orchestration bottleneck.',
     githubUrl: 'https://github.com/akashsingh-ops/EazEae_MajorProject',
+    externalLink: {
+      url: 'https://github.com/akashsingh-ops/EazEae_MajorProject',
+      label: 'View Source ↗'
+    },
     featured: true,
     story: {
       problemStatement: 'Heritage sites in Agra lacked accessible digital visitor experiences, causing queue friction and ticket mismanagement.',

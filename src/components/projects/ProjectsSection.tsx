@@ -1,37 +1,19 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { motion, AnimatePresence, useInView, useReducedMotion } from 'motion/react';
+import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence, useReducedMotion } from 'motion/react';
 import { projectsData, ProjectExtended } from '../../data/projects';
 import { Modal } from '../ui/Modal';
-import { CountUp } from '../ui/CountUp';
 import { MimasaAiDiagram } from './MimasaAiDiagram';
 import { OceanMotionDiagram } from './OceanMotionDiagram';
 import { GeekSearchDiagram } from './GeekSearchDiagram';
 import { EazEaeDiagram } from './EazEaeDiagram';
 import {
-  ArrowUpRight,
-  Github,
   ArrowRight,
-  CheckCircle2,
-  ShieldCheck,
-  Zap,
-  Users,
-  Code,
-  QrCode,
-  Network,
-  Sparkles,
-  Layers,
-  ChevronRight,
-  Database,
-  Search,
-  Building2,
-  Briefcase
+  ArrowUpRight
 } from 'lucide-react';
 import {
   CinematicSection,
   childItemVariant
 } from '../ui/CinematicSection';
-
-const customEase = [0.22, 1, 0.36, 1] as const;
 
 export type ProjectId = 'mimasa-ai' | 'geek-search' | 'oceanmotion' | 'eazeae';
 
@@ -51,7 +33,6 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
     ? externalModalProject
     : internalModalProject;
 
-  // When external modal triggers, also sync active tab
   useEffect(() => {
     if (externalModalProject) {
       setSelectedProjectId(externalModalProject);
@@ -65,6 +46,7 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
 
   const shouldReduceMotion = useReducedMotion();
   const currentProject = projectsData.find((p) => p.id === selectedProjectId) || projectsData[0];
+  const currentIndex = projectsData.findIndex((p) => p.id === currentProject.id);
 
   return (
     <CinematicSection
@@ -72,39 +54,42 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
       chapterNumber="03"
       chapterLabel="SELECTED WORK"
       motionType="aperture"
-      className="py-24 sm:py-36"
+      className="py-24 sm:py-36 relative"
     >
-      <div className="max-w-5xl mx-auto px-6 sm:px-8 space-y-16 sm:space-y-20">
-        {/* Section Header */}
+      <div className="max-w-7xl mx-auto px-6 sm:px-8 space-y-16">
+        
+        {/* ========================================================================= */}
+        {/* SECTION HEADER: SELECTED WORK */}
+        {/* ========================================================================= */}
         <motion.div
           className="space-y-4 max-w-3xl"
           variants={shouldReduceMotion ? undefined : childItemVariant}
         >
-          <div className="flex items-center gap-3 font-mono text-xs text-[#9A9FA8]">
-            <span className="text-[#FF7A18] font-bold">03</span>
+          <div className="flex items-center gap-3 font-mono text-xs text-[#7E8994]">
+            <span className="text-[#FF6B53] font-bold">03</span>
             <span className="text-white/20">/</span>
             <span className="uppercase tracking-widest">SELECTED WORK</span>
           </div>
 
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#F5F5F2] tracking-tight leading-tight">
-            Turning complex systems into dependable software.
+          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-[#FFFFFF] tracking-tight leading-[1.08]">
+            Selected Work<span className="text-[#FF6B53]">.</span>
           </h2>
 
-          <p className="text-base sm:text-lg text-[#9A9FA8] leading-relaxed">
-            Case studies grounded in backend architecture, graph databases, multi-tenant RBAC, enterprise search, and AI-driven automation.
+          <p className="text-lg sm:text-xl text-[#C3CBD3] leading-relaxed">
+            Systems I've built, improved, and learned from.
           </p>
         </motion.div>
 
         {/* ========================================================================= */}
-        {/* CLEAN PROJECT SELECTOR NAVIGATION */}
+        {/* CLEAN 4-PROJECT SELECTOR TABS: MIMASA AI, GEEK-SEARCH, OCEANMOTION, EAZEAE */}
         {/* ========================================================================= */}
         <div className="space-y-4">
-          <div className="flex items-center justify-between text-xs font-mono text-[#666C75]">
-            <span className="uppercase tracking-widest text-[#FF7A18] font-bold">// Project Index</span>
-            <span>Click to switch project view</span>
+          <div className="flex items-center justify-between text-xs font-mono text-[#7E8994] pb-2 border-b border-white/8">
+            <span className="uppercase tracking-widest text-[#FF6B53] font-bold">// Project Index</span>
+            <span>Select project to view technical architecture</span>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2.5 p-2 rounded-2xl bg-[#111418]/60 border border-white/6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
             {projectsData.map((project, idx) => {
               const isSelected = selectedProjectId === project.id;
               const formattedNum = `0${idx + 1}`;
@@ -113,42 +98,30 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
                 <button
                   key={project.id}
                   onClick={() => setSelectedProjectId(project.id as ProjectId)}
-                  className={`p-3.5 sm:p-4 rounded-xl text-left transition-all duration-300 relative group ${
+                  className={`p-4 sm:p-5 rounded-2xl text-left transition-all duration-200 relative group ${
                     isSelected
-                      ? 'bg-[#171B20] border border-[#FF7A18]/60 shadow-lg shadow-[#FF7A18]/5'
-                      : 'bg-[#0B0D0F]/70 border border-white/5 hover:border-white/15 opacity-70 hover:opacity-100'
+                      ? 'bg-[#151E27] border border-[#FF6B53]/60 shadow-xl shadow-[#FF6B53]/5 -translate-y-0.5'
+                      : 'bg-[#151E27]/30 hover:bg-[#151E27]/70 border border-white/5 opacity-70 hover:opacity-100'
                   }`}
                 >
-                  {/* Top indicator */}
                   <div className="flex items-center justify-between mb-2">
-                    <span className={`font-mono text-xs font-bold ${isSelected ? 'text-[#FF7A18]' : 'text-[#666C75]'}`}>
+                    <span className={`font-mono text-xs font-bold ${isSelected ? 'text-[#FF6B53]' : 'text-[#7E8994]'}`}>
                       {formattedNum} /
                     </span>
                     {project.company && (
-                      <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-white/5 text-[#9A9FA8]">
+                      <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-white/5 text-[#C3CBD3]">
                         {project.company}
                       </span>
                     )}
                   </div>
 
-                  <h3 className={`font-mono font-bold text-sm sm:text-base tracking-tight transition-colors ${
-                    isSelected ? 'text-[#F5F5F2]' : 'text-[#9A9FA8] group-hover:text-[#F5F5F2]'
-                  }`}>
-                    {project.title.toUpperCase()}
+                  <h3 className={`font-extrabold text-sm sm:text-base tracking-tight mb-1 ${isSelected ? 'text-[#FFFFFF]' : 'text-[#C3CBD3]'}`}>
+                    {project.title}
                   </h3>
 
-                  <p className="text-[11px] text-[#666C75] line-clamp-1 mt-1 font-mono">
-                    {project.architectureSubtitle || project.category}
+                  <p className="text-xs text-[#7E8994] line-clamp-1">
+                    {project.tagline}
                   </p>
-
-                  {/* Active bottom glow bar */}
-                  {isSelected && (
-                    <motion.div
-                      layoutId="activeProjectIndicator"
-                      className="absolute bottom-0 left-3 right-3 h-[2px] bg-gradient-to-r from-transparent via-[#FF7A18] to-transparent"
-                      transition={{ duration: 0.4, ease: customEase }}
-                    />
-                  )}
                 </button>
               );
             })}
@@ -156,434 +129,238 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
         </div>
 
         {/* ========================================================================= */}
-        {/* ACTIVE PROJECT HERO SHOWCASE (Cinematic 500-700ms Transition) */}
+        {/* ACTIVE PROJECT SHOWCASE */}
         {/* ========================================================================= */}
-        <div className="relative min-h-[520px]">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={currentProject.id}
-              initial={shouldReduceMotion ? { opacity: 1 } : { opacity: 0, y: 16, scale: 0.985 }}
-              animate={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, y: 0, scale: 1 }}
-              exit={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, y: -12, scale: 0.985 }}
-              transition={{ duration: 0.55, ease: customEase }}
-              className="p-6 sm:p-9 rounded-3xl bg-[#111418]/50 border border-white/8 hover:border-white/15 transition-all duration-300 space-y-8"
-            >
-              {/* Card Meta Header */}
-              <div className="flex flex-wrap items-center justify-between gap-3 border-b border-white/6 pb-4">
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={currentProject.id}
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -15 }}
+            transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+            className="space-y-8"
+          >
+            {/* Project Overview Card */}
+            <div className="p-6 sm:p-10 rounded-3xl bg-[#151E27] border border-white/8 space-y-8 relative overflow-hidden">
+              
+              {/* Top Meta Line */}
+              <div className="flex flex-wrap items-center justify-between gap-4 pb-6 border-b border-white/8">
                 <div className="flex items-center gap-3">
-                  <span className="font-mono text-xs text-[#FF7A18] font-bold px-2 py-0.5 rounded bg-[#FF7A18]/10 border border-[#FF7A18]/20">
-                    {projectsData.findIndex((p) => p.id === currentProject.id) + 1 < 10
-                      ? `0${projectsData.findIndex((p) => p.id === currentProject.id) + 1}`
-                      : projectsData.findIndex((p) => p.id === currentProject.id) + 1}{' '}
-                    // {currentProject.title.toUpperCase()}
+                  <span className="font-mono text-lg font-bold text-[#FF6B53]">
+                    0{currentIndex + 1} /
                   </span>
-                  {currentProject.company && (
-                    <span className="text-xs font-mono text-[#9A9FA8] flex items-center gap-1.5">
-                      <Building2 className="w-3.5 h-3.5 text-[#FF7A18]" />
-                      <span>{currentProject.company}</span>
+                  <span className="text-xl sm:text-2xl font-extrabold text-[#FFFFFF] tracking-tight">
+                    {currentProject.title}
+                  </span>
+                </div>
+
+                <div className="flex flex-wrap items-center gap-2.5 sm:gap-3">
+                  {currentProject.role && currentProject.role.length > 0 && (
+                    <span className="text-xs font-mono px-3 py-1.5 rounded-lg bg-[#0F161E] border border-white/10 text-[#C3CBD3]">
+                      Role: {currentProject.role[0]}
                     </span>
+                  )}
+
+                  {currentProject.externalLink && (
+                    <a
+                      href={currentProject.externalLink.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={`${currentProject.externalLink.label} for ${currentProject.title} — opens in a new tab`}
+                      className="group inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-[#0F161E] hover:bg-[#1B2630] border border-[#FF6B53]/35 hover:border-[#FF6B53] text-xs font-mono text-[#FFFFFF] hover:text-[#FF6B53] transition-all duration-200 focus:outline-none"
+                    >
+                      <span>{currentProject.externalLink.label}</span>
+                      <ArrowUpRight className="w-3.5 h-3.5 text-[#FF6B53] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-200" />
+                    </a>
+                  )}
+
+                  <button
+                    onClick={() => setInternalModalProject(currentProject.id as ProjectId)}
+                    className="group inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-[#FF6B53] hover:bg-[#FF7A63] text-[#0F161E] font-bold text-xs tracking-wide transition-all shadow-md"
+                  >
+                    <span>Explore Case Study</span>
+                    <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+                  </button>
+                </div>
+              </div>
+
+              {/* Tagline & Core Problem Statement */}
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                <div className="lg:col-span-8 space-y-4">
+                  <h4 className="text-xl sm:text-2xl font-bold text-[#FFFFFF] tracking-tight">
+                    {currentProject.tagline}
+                  </h4>
+                  <p className="text-base sm:text-lg text-[#C3CBD3] leading-relaxed">
+                    {currentProject.personalContext || currentProject.problem}
+                  </p>
+
+                  {/* Honesty note / collaboration callout for Mimasa AI */}
+                  {currentProject.id === 'mimasa-ai' && (
+                    <div className="p-4 rounded-xl bg-[#0F161E] border border-[#E25B45]/30 text-xs font-mono text-[#C3CBD3] space-y-1">
+                      <span className="text-[#FF6B53] font-bold block">// Cross-Functional Team Support:</span>
+                      <p>
+                        Worked closely with the GenAI and Data Science teams at Xaigi Technology, providing backend architecture and frontend engineering support for data integration, tenant isolation, and search latency optimization.
+                      </p>
+                    </div>
+                  )}
+
+                  {/* Metrics Bar */}
+                  {currentProject.metrics && currentProject.metrics.length > 0 && (
+                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-4">
+                      {currentProject.metrics.map((m, idx) => (
+                        <div key={idx} className="p-3.5 rounded-xl bg-[#0F161E] border border-white/6 space-y-1">
+                          <div className="text-base sm:text-lg font-mono font-bold text-[#FF6B53]">
+                            {m.value}
+                          </div>
+                          <div className="text-[11px] text-[#7E8994] font-medium leading-tight">
+                            {m.label}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
                   )}
                 </div>
 
-                <span className="text-xs font-mono text-[#666C75]">
-                  {currentProject.architectureSubtitle}
-                </span>
-              </div>
-
-              {/* Title & Tagline */}
-              <div className="space-y-3">
-                <h3 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#F5F5F2] tracking-tight">
-                  {currentProject.title}
-                </h3>
-                <p className="text-lg sm:text-xl font-medium text-[#9A9FA8] max-w-3xl leading-relaxed">
-                  {currentProject.tagline}
-                </p>
-              </div>
-
-              {/* Key Quick Facts Strip */}
-              <div className="flex flex-wrap items-center gap-6 sm:gap-10 py-4 border-y border-white/8 font-mono text-sm">
-                {currentProject.quickFacts.map((fact, idx) => (
-                  <React.Fragment key={idx}>
-                    <div>
-                      <span className="text-xl sm:text-2xl font-bold text-[#F5F5F2] block">
-                        {fact.stat}
-                      </span>
-                      <span className="text-xs text-[#666C75]">{fact.label}</span>
+                {/* Tech Stack Pills */}
+                <div className="lg:col-span-4 space-y-4">
+                  <div className="p-5 rounded-2xl bg-[#0F161E] border border-white/6 space-y-3">
+                    <span className="text-xs font-mono text-[#7E8994] uppercase tracking-wider block">
+                      Core Technologies:
+                    </span>
+                    <div className="flex flex-wrap gap-1.5">
+                      {currentProject.technologies.map((tech) => (
+                        <span
+                          key={tech}
+                          className="px-2.5 py-1 rounded-lg bg-[#151E27] border border-[#E25B45]/20 text-xs font-mono text-[#FFFFFF]"
+                        >
+                          {tech}
+                        </span>
+                      ))}
                     </div>
-                    {idx < currentProject.quickFacts.length - 1 && (
-                      <div className="w-[1px] h-8 bg-white/10 hidden sm:block" />
-                    )}
-                  </React.Fragment>
-                ))}
+                  </div>
+                </div>
               </div>
 
-              {/* Project Signature Visual Component */}
-              <div className="space-y-2">
+              {/* Dynamic Interactive Diagram Container */}
+              <div className="pt-4 border-t border-white/8">
                 {currentProject.id === 'mimasa-ai' && <MimasaAiDiagram />}
                 {currentProject.id === 'oceanmotion' && <OceanMotionDiagram />}
                 {currentProject.id === 'geek-search' && <GeekSearchDiagram />}
                 {currentProject.id === 'eazeae' && <EazEaeDiagram />}
               </div>
 
-              {/* Primary Call to Action */}
-              <div className="flex flex-wrap items-center justify-between gap-4 pt-2">
-                <button
-                  onClick={() => setInternalModalProject(currentProject.id as ProjectId)}
-                  className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-[#171B20] hover:bg-[#FF7A18] text-sm font-semibold text-[#F5F5F2] hover:text-[#090B0D] border border-white/15 hover:border-[#FF7A18] transition-all duration-200 shadow-md group"
-                >
-                  <span>Explore case study</span>
-                  <ArrowUpRight className="w-4 h-4 text-[#FF7A18] group-hover:text-[#090B0D] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-                </button>
+            </div>
+          </motion.div>
+        </AnimatePresence>
 
-                {currentProject.githubUrl && (
-                  <a
-                    href={currentProject.githubUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg bg-transparent hover:bg-white/5 text-xs font-mono text-[#9A9FA8] hover:text-[#F5F5F2] border border-white/8 transition-colors"
-                  >
-                    <Github className="w-3.5 h-3.5" />
-                    <span>Source Repository</span>
-                    <ArrowUpRight className="w-3 h-3 text-[#666C75]" />
-                  </a>
-                )}
-              </div>
-            </motion.div>
-          </AnimatePresence>
-        </div>
-
-        {/* ========================================================================= */}
-        {/* SELECTED WORK PROGRESSION RELATIONSHIP */}
-        {/* ========================================================================= */}
-        <div className="p-6 rounded-2xl bg-[#111418]/40 border border-white/6 space-y-4">
-          <div className="flex items-center justify-between text-xs font-mono text-[#666C75]">
-            <span className="uppercase tracking-wider text-[#FF7A18] font-bold">// Engineering Scope Progression</span>
-            <span>Real-World → Scale & AI</span>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-4 gap-3 font-mono text-xs">
-            {[
-              { id: 'eazeae', title: '04. EAZEAE', desc: 'Full-stack + Real-world access validation' },
-              { id: 'geek-search', title: '02. GEEK-SEARCH', desc: 'Builder + Personal initiative & 1,000+ students' },
-              { id: 'oceanmotion', title: '03. OCEANMOTION', desc: 'Deep Backend + Graph DB + 70+ APIs + RBAC' },
-              { id: 'mimasa-ai', title: '01. MIMASA AI', desc: 'Enterprise Data + Search + Multi-Tenant + AI' }
-            ].map((prog) => (
-              <button
-                key={prog.id}
-                onClick={() => setSelectedProjectId(prog.id as ProjectId)}
-                className={`p-3 rounded-xl text-left border transition-all ${
-                  selectedProjectId === prog.id
-                    ? 'bg-[#171B20] border-[#FF7A18]/40 text-[#F5F5F2]'
-                    : 'bg-[#0B0D0F] border-white/5 text-[#9A9FA8] hover:border-white/15'
-                }`}
-              >
-                <div className="font-bold text-[#FF7A18] text-[11px] mb-1">{prog.title}</div>
-                <div className="text-[10px] text-[#9A9FA8] leading-snug">{prog.desc}</div>
-              </button>
-            ))}
-          </div>
-        </div>
       </div>
 
       {/* ========================================================================= */}
-      {/* CASE STUDY MODAL: MIMASA AI */}
+      {/* DEEP TECHNICAL CASE STUDY MODAL */}
       {/* ========================================================================= */}
-      {activeModalProject === 'mimasa-ai' && (
+      {activeModalProject && (
         <Modal
           isOpen={true}
           onClose={handleCloseModal}
-          title="Mimasa AI Case Study"
-          subtitle="AI-Powered Enterprise Data Analytics & Search (Xaigi Technology)"
-          maxWidth="3xl"
+          title={`Case Study // ${projectsData.find(p => p.id === activeModalProject)?.title}`}
         >
-          <div className="space-y-6 text-[#9A9FA8] leading-relaxed text-sm sm:text-base">
-            {/* The Problem */}
-            <div className="p-5 rounded-2xl bg-[#0B0D0F] border border-white/8 space-y-3">
-              <span className="text-[11px] font-mono text-[#FF7A18] uppercase font-bold tracking-wider block">
-                The Problem
-              </span>
-              <p className="text-base sm:text-lg font-bold text-[#F5F5F2]">
-                "Data exists. But it lives in silos — across systems, teams, and formats."
-              </p>
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 font-mono text-xs text-[#9A9FA8] pt-1">
-                <div className="p-2.5 rounded-lg bg-white/5 border border-white/6 text-center">
-                  <span className="text-[#FF7A18] block font-bold">01</span>
-                  <span>Insights are delayed.</span>
+          {(() => {
+            const proj = projectsData.find(p => p.id === activeModalProject);
+            if (!proj) return null;
+            const pIdx = projectsData.findIndex(p => p.id === proj.id);
+
+            return (
+              <div className="space-y-8 text-[#C3CBD3] text-sm sm:text-base leading-relaxed">
+                
+                {/* Header info */}
+                <div className="flex flex-wrap items-start justify-between gap-4 pb-4 border-b border-white/8">
+                  <div className="space-y-1">
+                    <div className="flex items-center gap-2 font-mono text-xs text-[#FF6B53] font-bold">
+                      <span>0{pIdx + 1}</span>
+                      <span>/</span>
+                      <span>{proj.company || 'ENGINEERING INITIATIVE'}</span>
+                    </div>
+                    <h3 className="text-2xl sm:text-3xl font-extrabold text-[#FFFFFF]">
+                      {proj.title}
+                    </h3>
+                    <p className="text-base text-[#C3CBD3]">
+                      {proj.tagline}
+                    </p>
+                  </div>
+
+                  {proj.externalLink && (
+                    <a
+                      href={proj.externalLink.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="group inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-[#0F161E] hover:bg-[#1B2630] border border-[#FF6B53]/40 hover:border-[#FF6B53] text-xs font-mono text-[#FFFFFF] hover:text-[#FF6B53] transition-all duration-200 shrink-0 focus:outline-none"
+                    >
+                      <span>{proj.externalLink.label}</span>
+                      <ArrowUpRight className="w-3.5 h-3.5 text-[#FF6B53] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-200" />
+                    </a>
+                  )}
                 </div>
-                <div className="p-2.5 rounded-lg bg-white/5 border border-white/6 text-center">
-                  <span className="text-[#FF7A18] block font-bold">02</span>
-                  <span>Decisions are reactive.</span>
+
+                {/* Problem Statement */}
+                <div className="space-y-2">
+                  <h4 className="font-mono text-xs font-bold text-[#FFFFFF] uppercase tracking-wider">
+                    01. THE PROBLEM
+                  </h4>
+                  <p className="text-xs sm:text-sm text-[#C3CBD3]">
+                    {proj.story?.problemStatement || proj.problem || proj.personalContext}
+                  </p>
                 </div>
-                <div className="p-2.5 rounded-lg bg-white/5 border border-white/6 text-center">
-                  <span className="text-[#FF7A18] block font-bold">03</span>
-                  <span>Execution is manual.</span>
+
+                {/* Technical Architecture */}
+                <div className="space-y-2">
+                  <h4 className="font-mono text-xs font-bold text-[#FFFFFF] uppercase tracking-wider">
+                    02. ARCHITECTURE & IMPLEMENTATION
+                  </h4>
+                  <p className="text-xs sm:text-sm text-[#C3CBD3]">
+                    {proj.solution || 'Implemented robust backend API contracts, normalized schemas, and fine-grained data access layers.'}
+                  </p>
                 </div>
+
+                {/* Key Lessons / Outcome */}
+                <div className="space-y-2">
+                  <h4 className="font-mono text-xs font-bold text-[#FFFFFF] uppercase tracking-wider">
+                    03. MEASURED IMPACT
+                  </h4>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
+                    {proj.metrics.map((m, idx) => (
+                      <div key={idx} className="p-3 rounded-xl bg-[#151E27] border border-white/6">
+                        <div className="text-base font-mono font-bold text-[#FF6B53]">{m.value}</div>
+                        <div className="text-xs text-[#7E8994]">{m.label}</div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="pt-4 border-t border-white/8 flex flex-wrap items-center justify-between gap-3 text-xs font-mono text-[#7E8994]">
+                  {proj.externalLink ? (
+                    <a
+                      href={proj.externalLink.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="group inline-flex items-center gap-1.5 text-[#C3CBD3] hover:text-[#FF6B53] transition-colors"
+                    >
+                      <span>{proj.externalLink.label}</span>
+                      <ArrowUpRight className="w-3.5 h-3.5 text-[#FF6B53] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                    </a>
+                  ) : (
+                    <span>Akash Singh · Engineering Case Study</span>
+                  )}
+                  <button
+                    onClick={handleCloseModal}
+                    className="text-[#FF6B53] font-bold hover:underline ml-auto"
+                  >
+                    Close Case Study ✕
+                  </button>
+                </div>
+
               </div>
-            </div>
-
-            {/* What Mimasa AI Does */}
-            <div className="space-y-2">
-              <h4 className="text-base font-bold text-[#F5F5F2] font-mono">What Mimasa AI Does</h4>
-              <p>
-                Mimasa AI connects to the systems organizations already run, reconciles data into governed models, lets users question that data in plain language, and helps carry decisions into source systems through automation agents.
-              </p>
-            </div>
-
-            {/* Akash's Role (Honest & Explicit) */}
-            <div className="p-4 rounded-xl bg-[#171B20] border border-[#FF7A18]/30 space-y-2">
-              <span className="text-[11px] font-mono uppercase tracking-wider text-[#FF7A18] font-bold block">
-                My Role // Backend + Frontend Engineering Support
-              </span>
-              <p className="text-[#F5F5F2] text-sm">
-                Worked closely with the <strong>GenAI and Data Science teams</strong>, providing backend and frontend engineering support across data analytics, search, organization management, notifications, onboarding, and AI-powered workflows.
-              </p>
-            </div>
-
-            {/* Interactive Architecture & Diagram Embed */}
-            <div className="space-y-2">
-              <span className="text-xs font-mono text-[#666C75] uppercase tracking-wider block">
-                // Interactive Contribution Exploration
-              </span>
-              <MimasaAiDiagram />
-            </div>
-
-            {/* Measurable Outcomes */}
-            <div className="p-4 rounded-xl bg-[#0B0D0F] border border-white/8 space-y-3">
-              <span className="text-[11px] font-mono uppercase tracking-wider text-[#FF7A18] font-bold block">
-                Measurable Impact & Results
-              </span>
-              <ul className="space-y-2 font-mono text-xs sm:text-sm text-[#F5F5F2]">
-                <li className="flex items-center gap-2">
-                  <span className="text-[#FF7A18]">✓</span>
-                  <span>&lt;100ms fuzzy and prefix discovery across data sources, dashboards, and charts</span>
-                </li>
-                <li className="flex items-center gap-2">
-                  <span className="text-[#FF7A18]">✓</span>
-                  <span>6-step signal onboarding pipeline capturing profile signals for GenAI recommendations</span>
-                </li>
-                <li className="flex items-center gap-2">
-                  <span className="text-[#FF7A18]">✓</span>
-                  <span>Strict multi-tenant organization workspace data isolation preventing cross-tenant leakage</span>
-                </li>
-                <li className="flex items-center gap-2">
-                  <span className="text-[#FF7A18]">✓</span>
-                  <span>Decoupled Celery and Django Signal notification pipeline handling high event volume</span>
-                </li>
-              </ul>
-            </div>
-
-            {/* Key Takeaway */}
-            <div className="text-xs font-mono text-[#9A9FA8] pt-2 border-t border-white/6">
-              <strong className="text-[#F5F5F2]">What I Learned:</strong> High-performance backend pipelines, clean data schemas, and strict boundary isolation are the essential bedrock required before any GenAI layer can produce reliable insights.
-            </div>
-          </div>
-        </Modal>
-      )}
-
-      {/* ========================================================================= */}
-      {/* CASE STUDY MODAL: OCEANMOTION */}
-      {/* ========================================================================= */}
-      {activeModalProject === 'oceanmotion' && (
-        <Modal
-          isOpen={true}
-          onClose={handleCloseModal}
-          title="OceanMotion Case Study"
-          subtitle="Enterprise Cloud Analytics Platform (Xaigi Technology)"
-          maxWidth="3xl"
-        >
-          <div className="space-y-6 text-[#9A9FA8] leading-relaxed text-sm sm:text-base">
-            {/* Primary Story */}
-            <div className="p-5 rounded-2xl bg-[#0B0D0F] border border-white/8 space-y-3">
-              <span className="text-[11px] font-mono text-[#FF7A18] uppercase font-bold tracking-wider block">
-                Primary Mission
-              </span>
-              <p className="text-base sm:text-lg font-bold text-[#F5F5F2]">
-                Turning a complex dataset lifecycle into a governed publishing and analytics platform.
-              </p>
-              <div className="p-3 rounded-lg bg-white/5 border border-white/6 font-mono text-xs text-[#9A9FA8]">
-                UPLOAD → LICENSING → PRICING → ACCESS CONTROL → PUBLICATION → ANALYTICS
-              </div>
-            </div>
-
-            {/* Akash's Role */}
-            <div className="space-y-2">
-              <h4 className="text-base font-bold text-[#F5F5F2] font-mono">Backend Architecture & Core Contributions</h4>
-              <p>
-                Engineered 70+ production REST APIs covering dataset ingestion, metadata schemas, licensing, subscription tiers, and access control. Represented connected entities in Neo4j (USER → GROUP → DATASET → CHART → DASHBOARD) and authored 35+ complex Cypher queries.
-              </p>
-            </div>
-
-            {/* Interactive Graph & RBAC Showcase */}
-            <div className="space-y-2">
-              <span className="text-xs font-mono text-[#666C75] uppercase tracking-wider block">
-                // Neo4j & RBAC Architecture Engine
-              </span>
-              <OceanMotionDiagram />
-            </div>
-
-            {/* Group Sharing & Permission Leakage Investigation */}
-            <div className="p-4 rounded-xl bg-[#171B20] border border-[#FF7A18]/30 space-y-2">
-              <span className="text-[11px] font-mono uppercase tracking-wider text-[#FF7A18] font-bold block">
-                When Permissions Get Complicated // Root-Cause Debugging
-              </span>
-              <p className="text-[#F5F5F2] text-xs sm:text-sm">
-                Diagnosed and resolved permission leakage and high traversal latency on shared nested dashboards by refactoring recursive Cypher queries with explicit directional constraints and group-scoping predicates — resulting in correct RBAC enforcement and a <strong>30–40% query execution improvement</strong>.
-              </p>
-            </div>
-
-            {/* Measurable Outcomes */}
-            <div className="p-4 rounded-xl bg-[#0B0D0F] border border-white/8 space-y-3">
-              <span className="text-[11px] font-mono uppercase tracking-wider text-[#FF7A18] font-bold block">
-                Engineering Metrics
-              </span>
-              <ul className="space-y-2 font-mono text-xs sm:text-sm text-[#F5F5F2]">
-                <li className="flex items-center gap-2">
-                  <span className="text-[#FF7A18]">✓</span>
-                  <span>70+ REST APIs built across ingestion, licensing, subscriptions, and access control</span>
-                </li>
-                <li className="flex items-center gap-2">
-                  <span className="text-[#FF7A18]">✓</span>
-                  <span>35+ complex Cypher queries written and optimized</span>
-                </li>
-                <li className="flex items-center gap-2">
-                  <span className="text-[#FF7A18]">✓</span>
-                  <span>30–40% query execution speed improvement through indexing and pattern rewrites</span>
-                </li>
-                <li className="flex items-center gap-2">
-                  <span className="text-[#FF7A18]">✓</span>
-                  <span>Group Sharing / RBAC module architected from scratch with Apache Superset permissions</span>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </Modal>
-      )}
-
-      {/* ========================================================================= */}
-      {/* CASE STUDY MODAL: GEEK-SEARCH */}
-      {/* ========================================================================= */}
-      {activeModalProject === 'geek-search' && (
-        <Modal
-          isOpen={true}
-          onClose={handleCloseModal}
-          title="Geek-Search Case Study"
-          subtitle="Placement & Competitive Coding Platform"
-          maxWidth="2xl"
-        >
-          <div className="space-y-6 text-[#9A9FA8] leading-relaxed text-sm sm:text-base">
-            <div className="p-4 rounded-xl bg-[#0B0D0F] border border-white/8 space-y-1">
-              <span className="text-[11px] font-mono text-[#FF7A18] uppercase font-bold">
-                Origin & Context
-              </span>
-              <p className="text-[#F5F5F2]">
-                Coming from a small-town background, Akash saw that many students lacked exposure to placement-oriented preparation, coding contests, and industry expectations. He built Geek-Search to help bridge that gap.
-              </p>
-            </div>
-
-            <div className="space-y-2">
-              <h4 className="text-base font-bold text-[#F5F5F2]">The Problem</h4>
-              <p>
-                Students outside major tier-1 hubs lacked structured tracking for coding contests, transparent leaderboards, and organized placement roadmaps.
-              </p>
-            </div>
-
-            <div className="space-y-2">
-              <h4 className="text-base font-bold text-[#F5F5F2]">Role & Contribution (Frontend + Database)</h4>
-              <p>
-                Contributed across <strong>frontend engineering and database design & optimization</strong>, structuring queries and state management so students could submit code and track live rankings seamlessly during active campus coding contests.
-              </p>
-            </div>
-
-            <div className="p-4 rounded-xl bg-[#171B20] border border-white/10 space-y-3">
-              <span className="text-[11px] font-mono uppercase tracking-wider text-[#FF7A18] font-bold block">
-                Measurable Impact
-              </span>
-              <ul className="space-y-2 font-mono text-xs sm:text-sm text-[#F5F5F2]">
-                <li className="flex items-center gap-2">
-                  <span className="text-[#FF7A18]">✓</span>
-                  <span>1,000+ students actively engaged in preparation</span>
-                </li>
-                <li className="flex items-center gap-2">
-                  <span className="text-[#FF7A18]">✓</span>
-                  <span>10,000+ code submissions processed reliably</span>
-                </li>
-                <li className="flex items-center gap-2">
-                  <span className="text-[#FF7A18]">✓</span>
-                  <span>~40% latency reduction achieved for page and contest responses</span>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </Modal>
-      )}
-
-      {/* ========================================================================= */}
-      {/* CASE STUDY MODAL: EAZEAE */}
-      {/* ========================================================================= */}
-      {activeModalProject === 'eazeae' && (
-        <Modal
-          isOpen={true}
-          onClose={handleCloseModal}
-          title="EazEae Case Study"
-          subtitle="Digital Tourism & Access Platform"
-          maxWidth="2xl"
-        >
-          <div className="space-y-6 text-[#9A9FA8] leading-relaxed text-sm sm:text-base">
-            <div className="p-4 rounded-xl bg-[#0B0D0F] border border-white/8 space-y-1">
-              <span className="text-[11px] font-mono text-[#FF7A18] uppercase font-bold">
-                Origin & Context
-              </span>
-              <p className="text-[#F5F5F2]">
-                Growing up around Agra made Akash aware of the gap in digital visitor experiences around smaller heritage monuments, where manual queues and paper ticketing created unnecessary friction.
-              </p>
-            </div>
-
-            <div className="space-y-2">
-              <h4 className="text-base font-bold text-[#F5F5F2]">The Engineering Challenge</h4>
-              <p>
-                The primary challenge was ensuring reliable QR-based access verification and robust backend/database performance under concurrent gate entry requests while strictly preventing duplicate or reused passes.
-              </p>
-            </div>
-
-            <div className="space-y-2">
-              <h4 className="text-base font-bold text-[#F5F5F2]">The Approach</h4>
-              <p>
-                Built a streamlined validation workflow optimizing database indexing and request handling to keep latency minimal under concurrent visitor scans.
-              </p>
-            </div>
-
-            <div className="p-4 rounded-xl bg-[#171B20] border border-white/10 space-y-3">
-              <span className="text-[11px] font-mono uppercase tracking-wider text-[#FF7A18] font-bold block">
-                Measurable Outcomes
-              </span>
-              <ul className="space-y-2 font-mono text-xs sm:text-sm text-[#F5F5F2]">
-                <li className="flex items-center gap-2">
-                  <span className="text-[#FF7A18]">✓</span>
-                  <span>500+ daily visitor entry requests handled smoothly</span>
-                </li>
-                <li className="flex items-center gap-2">
-                  <span className="text-[#FF7A18]">✓</span>
-                  <span>~75% faster response times through optimized validation pipelines</span>
-                </li>
-                <li className="flex items-center gap-2">
-                  <span className="text-[#FF7A18]">✓</span>
-                  <span>100% duplicate access prevention at the gate</span>
-                </li>
-              </ul>
-            </div>
-
-            <div className="pt-2 flex items-center justify-between">
-              <a
-                href="https://github.com/akashsingh-ops/EazEae_MajorProject"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 text-xs font-mono text-[#FF7A18] hover:underline"
-              >
-                <Github className="w-4 h-4" />
-                <span>View project on GitHub ↗</span>
-              </a>
-            </div>
-          </div>
+            );
+          })()}
         </Modal>
       )}
     </CinematicSection>

@@ -20,7 +20,7 @@ export const ContactSection: React.FC = () => {
   return (
     <CinematicSection
       id="contact"
-      chapterNumber="09"
+      chapterNumber="10"
       chapterLabel="CONVERGENCE"
       motionType="convergence"
       className="py-24 sm:py-36 relative overflow-hidden"
@@ -34,7 +34,7 @@ export const ContactSection: React.FC = () => {
           variants={shouldReduceMotion ? undefined : childItemVariant}
         >
           <div className="flex items-center gap-3 font-mono text-xs text-[#7E8994]">
-            <span className="text-[#FF6B53] font-bold">09</span>
+            <span className="text-[#FF6B53] font-bold">10</span>
             <span className="text-white/20">/</span>
             <span className="uppercase tracking-widest">GET IN TOUCH</span>
           </div>

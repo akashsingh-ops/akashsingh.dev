@@ -30,6 +30,9 @@ const ALL_AUTOCOMPLETE_COMMANDS = [
   'oceanmotion',
   'xaigi',
   'architecture',
+  'playground',
+  'blueprint',
+  'simulator',
   'work',
   'open mimasa-ai',
   'open oceanmotion',
@@ -116,7 +119,7 @@ export const TerminalModal: React.FC<TerminalModalProps> = ({
             <p className="text-emerald-400 font-medium">✓ systems ready</p>
           </div>
           <div className="pt-1.5 text-[#69717D]">
-            Type <span className="text-[#FF7A18] font-bold">"help"</span> to see commands or try <span className="text-[#FF7A18]">"projects"</span> or <span className="text-[#FF7A18]">"mimasa"</span>.
+            Type <span className="text-[#FF6B53] font-bold">"help"</span> to see commands or try <span className="text-[#FF6B53]">"projects"</span> or <span className="text-[#FF6B53]">"mimasa"</span>.
           </div>
         </div>
       )
@@ -222,7 +225,7 @@ export const TerminalModal: React.FC<TerminalModalProps> = ({
         outputNode = (
           <div className="space-y-1 text-xs font-mono text-[#D8DEE5]">
             <p className="text-[#69717D]">Mechanical audio feedback: <span className="text-rose-400 font-bold">DISABLED</span></p>
-            <p className="text-[#69717D] text-[11px]">Type <span className="text-[#FF7A18]">sound on</span> to re-enable.</p>
+            <p className="text-[#69717D] text-[11px]">Type <span className="text-[#FF6B53]">sound on</span> to re-enable.</p>
           </div>
         );
       } else if (subArg === 'on' || subArg === 'enable') {
@@ -267,7 +270,7 @@ export const TerminalModal: React.FC<TerminalModalProps> = ({
         if (subArg === '--advanced' || subArg === '-a' || subArg === 'advanced') {
           outputNode = (
             <div className="space-y-3 text-xs font-mono text-[#D8DEE5]">
-              <p className="text-[#FF7A18] font-semibold">// Advanced terminal commands:</p>
+              <p className="text-[#FF6B53] font-semibold">// Advanced terminal commands:</p>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-1.5 text-[#69717D]">
                 <div><span className="text-[#D8DEE5] font-medium">architecture</span> → system topology</div>
                 <div><span className="text-[#D8DEE5] font-medium">xaigi</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;→ Xaigi Tech work</div>
@@ -281,7 +284,7 @@ export const TerminalModal: React.FC<TerminalModalProps> = ({
                 <div><span className="text-[#D8DEE5] font-medium">git log</span> &nbsp;&nbsp;&nbsp;&nbsp;→ career timeline</div>
               </div>
               <div className="pt-2 border-t border-white/6 text-[#69717D]">
-                <p className="text-[#FF7A18] font-medium">// Easter eggs:</p>
+                <p className="text-[#FF6B53] font-medium">// Easter eggs:</p>
                 <div className="flex flex-wrap gap-2 pt-1 text-[11px]">
                   <span className="px-1.5 py-0.5 bg-white/5 rounded border border-white/8 text-[#D8DEE5]">sudo hire akash</span>
                   <span className="px-1.5 py-0.5 bg-white/5 rounded border border-white/8 text-[#D8DEE5]">coffee</span>
@@ -293,7 +296,7 @@ export const TerminalModal: React.FC<TerminalModalProps> = ({
         } else {
           outputNode = (
             <div className="space-y-3 text-xs font-mono text-[#D8DEE5]">
-              <p className="text-[#FF7A18] font-semibold">Available commands:</p>
+              <p className="text-[#FF6B53] font-semibold">Available commands:</p>
               <div className="space-y-1 text-[#69717D]">
                 <p><span className="text-[#D8DEE5] font-medium inline-block w-28">about</span> → who is Akash?</p>
                 <p><span className="text-[#D8DEE5] font-medium inline-block w-28">projects</span> → explore 4 key case studies</p>
@@ -309,7 +312,7 @@ export const TerminalModal: React.FC<TerminalModalProps> = ({
                 <p><span className="text-[#D8DEE5] font-medium inline-block w-28">clear</span> → clear terminal</p>
               </div>
               <div className="pt-2 text-[11px] text-[#69717D] border-t border-white/6">
-                Tip: try <button onClick={() => executeCommand('open mimasa-ai')} className="text-[#FF7A18] underline hover:text-[#FF8B33]">"open mimasa-ai"</button> or <button onClick={() => executeCommand('open oceanmotion')} className="text-[#FF7A18] underline hover:text-[#FF8B33]">"open oceanmotion"</button>
+                Tip: try <button onClick={() => executeCommand('open mimasa-ai')} className="text-[#FF6B53] underline hover:text-[#FF7A63]">"open mimasa-ai"</button> or <button onClick={() => executeCommand('open oceanmotion')} className="text-[#FF6B53] underline hover:text-[#FF7A63]">"open oceanmotion"</button>
               </div>
             </div>
           );
@@ -321,7 +324,7 @@ export const TerminalModal: React.FC<TerminalModalProps> = ({
           <div className="space-y-3 text-xs font-mono text-[#D8DEE5]">
             <div>
               <p className="text-sm font-bold text-[#F5F5F2]">Akash Singh</p>
-              <p className="text-[#FF7A18]">Backend & Systems Software Engineer</p>
+              <p className="text-[#FF6B53]">Backend & Systems Software Engineer</p>
               <p className="text-[#69717D] text-[11px]">APIs · Graph Databases · Multi-tenancy · Search · Data & AI Workflows</p>
             </div>
             <div className="space-y-1">
@@ -347,7 +350,7 @@ export const TerminalModal: React.FC<TerminalModalProps> = ({
             <p>
               I started with frontend development, then became deeply fascinated by what happens behind the interface:
             </p>
-            <div className="py-1 text-[#FF7A18] font-bold">
+            <div className="py-1 text-[#FF6B53] font-bold">
               APIs → data → graph databases → systems → automation → AI workflows
             </div>
             <p>
@@ -361,13 +364,13 @@ export const TerminalModal: React.FC<TerminalModalProps> = ({
       case 'work':
         outputNode = (
           <div className="space-y-4 text-xs font-mono text-[#D8DEE5]">
-            <p className="text-[#FF7A18] font-semibold tracking-wider uppercase text-[11px]">SELECTED WORK // 4 CORE CASE STUDIES</p>
+            <p className="text-[#FF6B53] font-semibold tracking-wider uppercase text-[11px]">SELECTED WORK // 4 CORE CASE STUDIES</p>
             
             <div className="space-y-3 pl-2 border-l border-white/10">
               {/* 01 Mimasa AI */}
               <div className="space-y-1">
                 <div className="flex items-center gap-2">
-                  <span className="text-[#FF7A18] font-bold">01</span>
+                  <span className="text-[#FF6B53] font-bold">01</span>
                   <span className="text-[#F5F5F2] font-bold">mimasa-ai</span>
                   <span className="text-[10px] text-[#69717D]">// AI-powered enterprise data analytics & search</span>
                 </div>
@@ -377,7 +380,7 @@ export const TerminalModal: React.FC<TerminalModalProps> = ({
                 <div className="pl-6 pt-1">
                   <button
                     onClick={() => executeCommand('open mimasa-ai')}
-                    className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-[#171B20] hover:bg-[#FF7A18]/15 text-[#FF7A18] border border-white/8 hover:border-[#FF7A18]/30 transition-colors text-[11px]"
+                    className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-[#1B2630] hover:bg-[#FF6B53]/15 text-[#FF6B53] border border-white/8 hover:border-[#FF6B53]/30 transition-colors text-[11px]"
                   >
                     <span>open mimasa-ai</span>
                     <ArrowUpRight className="w-3 h-3" />
@@ -388,7 +391,7 @@ export const TerminalModal: React.FC<TerminalModalProps> = ({
               {/* 02 Geek-Search */}
               <div className="space-y-1 pt-2 border-t border-white/6">
                 <div className="flex items-center gap-2">
-                  <span className="text-[#FF7A18] font-bold">02</span>
+                  <span className="text-[#FF6B53] font-bold">02</span>
                   <span className="text-[#F5F5F2] font-bold">geek-search</span>
                   <span className="text-[10px] text-[#69717D]">// placement & contest platform</span>
                 </div>
@@ -396,7 +399,7 @@ export const TerminalModal: React.FC<TerminalModalProps> = ({
                 <div className="pl-6 pt-1">
                   <button
                     onClick={() => executeCommand('open geek-search')}
-                    className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-[#171B20] hover:bg-[#FF7A18]/15 text-[#FF7A18] border border-white/8 hover:border-[#FF7A18]/30 transition-colors text-[11px]"
+                    className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-[#1B2630] hover:bg-[#FF6B53]/15 text-[#FF6B53] border border-white/8 hover:border-[#FF6B53]/30 transition-colors text-[11px]"
                   >
                     <span>open geek-search</span>
                     <ArrowUpRight className="w-3 h-3" />
@@ -407,7 +410,7 @@ export const TerminalModal: React.FC<TerminalModalProps> = ({
               {/* 03 OceanMotion */}
               <div className="space-y-1 pt-2 border-t border-white/6">
                 <div className="flex items-center gap-2">
-                  <span className="text-[#FF7A18] font-bold">03</span>
+                  <span className="text-[#FF6B53] font-bold">03</span>
                   <span className="text-[#F5F5F2] font-bold">oceanmotion</span>
                   <span className="text-[10px] text-[#69717D]">// enterprise cloud analytics & graph platform</span>
                 </div>
@@ -415,7 +418,7 @@ export const TerminalModal: React.FC<TerminalModalProps> = ({
                 <div className="pl-6 pt-1">
                   <button
                     onClick={() => executeCommand('open oceanmotion')}
-                    className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-[#171B20] hover:bg-[#FF7A18]/15 text-[#FF7A18] border border-white/8 hover:border-[#FF7A18]/30 transition-colors text-[11px]"
+                    className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-[#1B2630] hover:bg-[#FF6B53]/15 text-[#FF6B53] border border-white/8 hover:border-[#FF6B53]/30 transition-colors text-[11px]"
                   >
                     <span>open oceanmotion</span>
                     <ArrowUpRight className="w-3 h-3" />
@@ -426,7 +429,7 @@ export const TerminalModal: React.FC<TerminalModalProps> = ({
               {/* 04 EazEae */}
               <div className="space-y-1 pt-2 border-t border-white/6">
                 <div className="flex items-center gap-2">
-                  <span className="text-[#FF7A18] font-bold">04</span>
+                  <span className="text-[#FF6B53] font-bold">04</span>
                   <span className="text-[#F5F5F2] font-bold">eazeae</span>
                   <span className="text-[10px] text-[#69717D]">// digital heritage tourism platform</span>
                 </div>
@@ -434,7 +437,7 @@ export const TerminalModal: React.FC<TerminalModalProps> = ({
                 <div className="pl-6 pt-1">
                   <button
                     onClick={() => executeCommand('open eazeae')}
-                    className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-[#171B20] hover:bg-[#FF7A18]/15 text-[#FF7A18] border border-white/8 hover:border-[#FF7A18]/30 transition-colors text-[11px]"
+                    className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-[#1B2630] hover:bg-[#FF6B53]/15 text-[#FF6B53] border border-white/8 hover:border-[#FF6B53]/30 transition-colors text-[11px]"
                   >
                     <span>open eazeae</span>
                     <ArrowUpRight className="w-3 h-3" />
@@ -444,7 +447,7 @@ export const TerminalModal: React.FC<TerminalModalProps> = ({
             </div>
 
             <div className="text-[#69717D] text-[11px]">
-              Type <span className="text-[#FF7A18]">open &lt;project-id&gt;</span> to inspect interactive case studies.
+              Type <span className="text-[#FF6B53]">open &lt;project-id&gt;</span> to inspect interactive case studies.
             </div>
           </div>
         );
@@ -456,11 +459,11 @@ export const TerminalModal: React.FC<TerminalModalProps> = ({
           <div className="space-y-3 text-xs font-mono text-[#D8DEE5]">
             <div className="flex items-center justify-between">
               <p className="text-sm font-bold text-[#F5F5F2]">01 / MIMASA AI</p>
-              <span className="text-[10px] text-[#FF7A18] px-2 py-0.5 rounded bg-[#FF7A18]/10 border border-[#FF7A18]/20">
+              <span className="text-[10px] text-[#FF6B53] px-2 py-0.5 rounded bg-[#FF6B53]/10 border border-[#FF6B53]/20">
                 Xaigi Technology
               </span>
             </div>
-            <p className="text-[#FF7A18] font-semibold">
+            <p className="text-[#FF6B53] font-semibold">
               Making enterprise data easier to understand, search, and act on.
             </p>
             <div className="space-y-1 pl-2 border-l border-white/10 text-[11px] text-[#69717D]">
@@ -473,7 +476,7 @@ export const TerminalModal: React.FC<TerminalModalProps> = ({
             <div className="pt-2 flex flex-wrap gap-2">
               <button
                 onClick={() => handleOpenProjectAction('mimasa-ai')}
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#FF7A18] text-[#090B0D] font-bold text-xs hover:bg-[#FF8B33] transition-colors"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#FF6B53] text-[#0F161E] font-bold text-xs hover:bg-[#FF7A63] transition-colors"
               >
                 <span>Launch Mimasa AI Case Study ↗</span>
               </button>
@@ -487,11 +490,11 @@ export const TerminalModal: React.FC<TerminalModalProps> = ({
           <div className="space-y-3 text-xs font-mono text-[#D8DEE5]">
             <div className="flex items-center justify-between">
               <p className="text-sm font-bold text-[#F5F5F2]">03 / OCEANMOTION</p>
-              <span className="text-[10px] text-[#FF7A18] px-2 py-0.5 rounded bg-[#FF7A18]/10 border border-[#FF7A18]/20">
+              <span className="text-[10px] text-[#FF6B53] px-2 py-0.5 rounded bg-[#FF6B53]/10 border border-[#FF6B53]/20">
                 Xaigi Technology
               </span>
             </div>
-            <p className="text-[#FF7A18] font-semibold">
+            <p className="text-[#FF6B53] font-semibold">
               Enterprise Cloud Analytics Platform — Dataset Publishing & Graph RBAC.
             </p>
             <div className="space-y-1 pl-2 border-l border-white/10 text-[11px] text-[#69717D]">
@@ -504,7 +507,7 @@ export const TerminalModal: React.FC<TerminalModalProps> = ({
             <div className="pt-2 flex flex-wrap gap-2">
               <button
                 onClick={() => handleOpenProjectAction('oceanmotion')}
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#FF7A18] text-[#090B0D] font-bold text-xs hover:bg-[#FF8B33] transition-colors"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#FF6B53] text-[#0F161E] font-bold text-xs hover:bg-[#FF7A63] transition-colors"
               >
                 <span>Launch OceanMotion Case Study ↗</span>
               </button>
@@ -523,21 +526,21 @@ export const TerminalModal: React.FC<TerminalModalProps> = ({
             <p className="text-[#69717D] leading-relaxed">
               Professional software engineering across graph databases, high-throughput APIs, multi-tenant RBAC, search, analytics, and GenAI collaboration.
             </p>
-            <div className="p-3 rounded-xl bg-[#111418] border border-white/8 space-y-2">
-              <span className="text-[10px] text-[#FF7A18] font-bold uppercase block">Core Projects Built at Xaigi:</span>
+            <div className="p-3 rounded-xl bg-[#151E27] border border-white/8 space-y-2">
+              <span className="text-[10px] text-[#FF6B53] font-bold uppercase block">Core Projects Built at Xaigi:</span>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
                 <button
                   onClick={() => executeCommand('open oceanmotion')}
-                  className="p-2 rounded-lg bg-[#0B0D0F] border border-white/6 hover:border-[#FF7A18]/40 text-left text-[#D8DEE5]"
+                  className="p-2 rounded-lg bg-[#0B0D0F] border border-white/6 hover:border-[#FF6B53]/40 text-left text-[#D8DEE5]"
                 >
-                  <strong className="text-[#FF7A18] block">01. OceanMotion</strong>
+                  <strong className="text-[#FF6B53] block">01. OceanMotion</strong>
                   <span className="text-[10px] text-[#69717D]">70+ APIs · Neo4j · RBAC · Superset</span>
                 </button>
                 <button
                   onClick={() => executeCommand('open mimasa-ai')}
-                  className="p-2 rounded-lg bg-[#0B0D0F] border border-white/6 hover:border-[#FF7A18]/40 text-left text-[#D8DEE5]"
+                  className="p-2 rounded-lg bg-[#0B0D0F] border border-white/6 hover:border-[#FF6B53]/40 text-left text-[#D8DEE5]"
                 >
-                  <strong className="text-[#FF7A18] block">02. Mimasa AI</strong>
+                  <strong className="text-[#FF6B53] block">02. Mimasa AI</strong>
                   <span className="text-[10px] text-[#69717D]">&lt;100ms Search · Tenant Isolation · AI</span>
                 </button>
               </div>
@@ -552,10 +555,10 @@ export const TerminalModal: React.FC<TerminalModalProps> = ({
       case 'architecture':
         outputNode = (
           <div className="space-y-3 text-xs font-mono text-[#D8DEE5]">
-            <p className="text-[#FF7A18] font-semibold">// BACKEND & SYSTEMS ARCHITECTURE OVERVIEW</p>
+            <p className="text-[#FF6B53] font-semibold">// BACKEND & SYSTEMS ARCHITECTURE OVERVIEW</p>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              <div className="p-3 rounded-xl bg-[#111418] border border-white/8 space-y-1">
-                <div className="text-[#FF7A18] font-bold flex items-center gap-1.5">
+              <div className="p-3 rounded-xl bg-[#151E27] border border-white/8 space-y-1">
+                <div className="text-[#FF6B53] font-bold flex items-center gap-1.5">
                   <Network className="w-3.5 h-3.5" />
                   GRAPH TOPOLOGY (NEO4J)
                 </div>
@@ -564,8 +567,8 @@ export const TerminalModal: React.FC<TerminalModalProps> = ({
                 </p>
               </div>
 
-              <div className="p-3 rounded-xl bg-[#111418] border border-white/8 space-y-1">
-                <div className="text-[#FF7A18] font-bold flex items-center gap-1.5">
+              <div className="p-3 rounded-xl bg-[#151E27] border border-white/8 space-y-1">
+                <div className="text-[#FF6B53] font-bold flex items-center gap-1.5">
                   <Shield className="w-3.5 h-3.5" />
                   MULTI-TENANT RBAC
                 </div>
@@ -574,8 +577,8 @@ export const TerminalModal: React.FC<TerminalModalProps> = ({
                 </p>
               </div>
 
-              <div className="p-3 rounded-xl bg-[#111418] border border-white/8 space-y-1">
-                <div className="text-[#FF7A18] font-bold flex items-center gap-1.5">
+              <div className="p-3 rounded-xl bg-[#151E27] border border-white/8 space-y-1">
+                <div className="text-[#FF6B53] font-bold flex items-center gap-1.5">
                   <Search className="w-3.5 h-3.5" />
                   INTELLIGENT SEARCH
                 </div>
@@ -584,8 +587,8 @@ export const TerminalModal: React.FC<TerminalModalProps> = ({
                 </p>
               </div>
 
-              <div className="p-3 rounded-xl bg-[#111418] border border-white/8 space-y-1">
-                <div className="text-[#FF7A18] font-bold flex items-center gap-1.5">
+              <div className="p-3 rounded-xl bg-[#151E27] border border-white/8 space-y-1">
+                <div className="text-[#FF6B53] font-bold flex items-center gap-1.5">
                   <Sparkles className="w-3.5 h-3.5" />
                   DATA & AI AUTOMATION
                 </div>
@@ -593,6 +596,41 @@ export const TerminalModal: React.FC<TerminalModalProps> = ({
                   Decoupled Celery event queues, ETL pipelines to Redshift, RAG contextual retrieval, and NL-to-SQL query planning.
                 </p>
               </div>
+            </div>
+            <div className="pt-2 flex items-center gap-2">
+              <button
+                onClick={() => {
+                  if (onNavigateSection) onNavigateSection('playground');
+                  onClose();
+                }}
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#FF6B53] text-[#0F161E] font-bold text-xs hover:bg-[#FF7A63] transition-colors"
+              >
+                <span>Launch Interactive Playground ↓</span>
+              </button>
+            </div>
+          </div>
+        );
+        break;
+
+      case 'playground':
+      case 'blueprint':
+      case 'simulator':
+        outputNode = (
+          <div className="space-y-3 text-xs font-mono text-[#D8DEE5]">
+            <p className="text-emerald-400 font-bold">// JUMPING TO ARCHITECTURE PLAYGROUND (SECTION 07)</p>
+            <p className="text-[#69717D] leading-relaxed">
+              Interactive System Blueprint simulator containing 3 production pipelines: Mimasa AI Search, OceanMotion Graph RBAC, and EazEae Atomic QR.
+            </p>
+            <div className="pt-1 flex gap-2">
+              <button
+                onClick={() => {
+                  if (onNavigateSection) onNavigateSection('playground');
+                  onClose();
+                }}
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#FF6B53] text-[#0F161E] font-bold text-xs hover:bg-[#FF7A63] transition-colors"
+              >
+                <span>Scroll to Playground</span>
+              </button>
             </div>
           </div>
         );
@@ -603,10 +641,10 @@ export const TerminalModal: React.FC<TerminalModalProps> = ({
           outputNode = (
             <div className="space-y-3 text-xs font-mono text-[#D8DEE5]">
               <p className="text-emerald-400 font-bold">opening project [mimasa-ai]...</p>
-              <div className="p-3 rounded-xl bg-[#111418] border border-white/8 space-y-2">
+              <div className="p-3 rounded-xl bg-[#151E27] border border-white/8 space-y-2">
                 <div className="flex items-center justify-between">
                   <span className="font-bold text-[#F5F5F2]">Mimasa AI</span>
-                  <span className="text-[10px] text-[#FF7A18] font-mono">ENTERPRISE DATA & SEARCH</span>
+                  <span className="text-[10px] text-[#FF6B53] font-mono">ENTERPRISE DATA & SEARCH</span>
                 </div>
                 <p className="text-[#69717D] text-[11px] leading-relaxed">
                   Making enterprise data easier to understand, search, and act on. &lt;100ms search, 6-step onboarding, tenant isolation, and GenAI collaboration.
@@ -614,10 +652,18 @@ export const TerminalModal: React.FC<TerminalModalProps> = ({
                 <div className="flex flex-wrap items-center gap-2 pt-1">
                   <button
                     onClick={() => handleOpenProjectAction('mimasa-ai')}
-                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#FF7A18] text-[#090B0D] font-bold text-xs hover:bg-[#FF8B33] transition-colors"
+                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#FF6B53] text-[#0F161E] font-bold text-xs hover:bg-[#FF7A63] transition-colors"
                   >
                     <span>Launch Full Case Study Modal ↗</span>
                   </button>
+                  <a
+                    href="https://app.mimasa.ai/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 text-[#D8DEE5] hover:text-[#FF6B53] text-xs border border-white/10"
+                  >
+                    <span>View Live Project ↗</span>
+                  </a>
                   <button
                     onClick={() => {
                       if (onNavigateSection) onNavigateSection('work');
@@ -635,10 +681,10 @@ export const TerminalModal: React.FC<TerminalModalProps> = ({
           outputNode = (
             <div className="space-y-3 text-xs font-mono text-[#D8DEE5]">
               <p className="text-emerald-400 font-bold">opening project [oceanmotion]...</p>
-              <div className="p-3 rounded-xl bg-[#111418] border border-white/8 space-y-2">
+              <div className="p-3 rounded-xl bg-[#151E27] border border-white/8 space-y-2">
                 <div className="flex items-center justify-between">
                   <span className="font-bold text-[#F5F5F2]">OceanMotion</span>
-                  <span className="text-[10px] text-[#FF7A18] font-mono">CLOUD ANALYTICS & GRAPH</span>
+                  <span className="text-[10px] text-[#FF6B53] font-mono">CLOUD ANALYTICS & GRAPH</span>
                 </div>
                 <p className="text-[#69717D] text-[11px] leading-relaxed">
                   70+ REST APIs, Neo4j graph centerpiece, 35+ Cypher queries with 30–40% optimization, and RBAC group sharing module.
@@ -646,7 +692,7 @@ export const TerminalModal: React.FC<TerminalModalProps> = ({
                 <div className="flex flex-wrap items-center gap-2 pt-1">
                   <button
                     onClick={() => handleOpenProjectAction('oceanmotion')}
-                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#FF7A18] text-[#090B0D] font-bold text-xs hover:bg-[#FF8B33] transition-colors"
+                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#FF6B53] text-[#0F161E] font-bold text-xs hover:bg-[#FF7A63] transition-colors"
                   >
                     <span>Launch Full Case Study Modal ↗</span>
                   </button>
@@ -667,10 +713,10 @@ export const TerminalModal: React.FC<TerminalModalProps> = ({
           outputNode = (
             <div className="space-y-3 text-xs font-mono text-[#D8DEE5]">
               <p className="text-emerald-400 font-bold">opening project [geek-search]...</p>
-              <div className="p-3 rounded-xl bg-[#111418] border border-white/8 space-y-2">
+              <div className="p-3 rounded-xl bg-[#151E27] border border-white/8 space-y-2">
                 <div className="flex items-center justify-between">
                   <span className="font-bold text-[#F5F5F2]">Geek-Search</span>
-                  <span className="text-[10px] text-[#FF7A18] font-mono">PLACEMENT PLATFORM</span>
+                  <span className="text-[10px] text-[#FF6B53] font-mono">PLACEMENT PLATFORM</span>
                 </div>
                 <p className="text-[#69717D] text-[11px] leading-relaxed">
                   Contributed across frontend engineering and database optimization, supporting 1,000+ students and 10,000+ contest code submissions.
@@ -678,7 +724,7 @@ export const TerminalModal: React.FC<TerminalModalProps> = ({
                 <div className="flex flex-wrap items-center gap-2 pt-1">
                   <button
                     onClick={() => handleOpenProjectAction('geek-search')}
-                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#FF7A18] text-[#090B0D] font-bold text-xs hover:bg-[#FF8B33] transition-colors"
+                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#FF6B53] text-[#0F161E] font-bold text-xs hover:bg-[#FF7A63] transition-colors"
                   >
                     <span>Launch Full Case Study Modal ↗</span>
                   </button>
@@ -699,10 +745,10 @@ export const TerminalModal: React.FC<TerminalModalProps> = ({
           outputNode = (
             <div className="space-y-3 text-xs font-mono text-[#D8DEE5]">
               <p className="text-emerald-400 font-bold">opening project [eazeae]...</p>
-              <div className="p-3 rounded-xl bg-[#111418] border border-white/8 space-y-2">
+              <div className="p-3 rounded-xl bg-[#151E27] border border-white/8 space-y-2">
                 <div className="flex items-center justify-between">
                   <span className="font-bold text-[#F5F5F2]">EazEae</span>
-                  <span className="text-[10px] text-[#FF7A18] font-mono">DIGITAL HERITAGE PLATFORM</span>
+                  <span className="text-[10px] text-[#FF6B53] font-mono">DIGITAL HERITAGE PLATFORM</span>
                 </div>
                 <p className="text-[#69717D] text-[11px] leading-relaxed">
                   500+ daily visitor entry requests handled smoothly with ~75% faster verification pipelines and atomic double-scan prevention.
@@ -710,7 +756,7 @@ export const TerminalModal: React.FC<TerminalModalProps> = ({
                 <div className="flex flex-wrap items-center gap-2 pt-1">
                   <button
                     onClick={() => handleOpenProjectAction('eazeae')}
-                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#FF7A18] text-[#090B0D] font-bold text-xs hover:bg-[#FF8B33] transition-colors"
+                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#FF6B53] text-[#0F161E] font-bold text-xs hover:bg-[#FF7A63] transition-colors"
                   >
                     <span>Launch Full Case Study Modal ↗</span>
                   </button>
@@ -742,7 +788,7 @@ export const TerminalModal: React.FC<TerminalModalProps> = ({
                   if (onNavigateSection) onNavigateSection('journey');
                   onClose();
                 }}
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded bg-white/5 hover:bg-white/10 text-[#FF7A18] border border-white/10 text-xs mt-1"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded bg-white/5 hover:bg-white/10 text-[#FF6B53] border border-white/10 text-xs mt-1"
               >
                 <span>View {subArg} in Timeline ↗</span>
               </button>
@@ -753,7 +799,7 @@ export const TerminalModal: React.FC<TerminalModalProps> = ({
           outputNode = (
             <div className="space-y-1 text-xs font-mono text-[#D8DEE5]">
               <p className="text-emerald-400 font-bold">opening resume...</p>
-              <a href={RESUME_URL} target="_blank" rel="noopener noreferrer" className="text-[#FF7A18] hover:underline flex items-center gap-1">
+              <a href={RESUME_URL} target="_blank" rel="noopener noreferrer" className="text-[#FF6B53] hover:underline flex items-center gap-1">
                 <span>↗ Google Drive PDF</span>
               </a>
             </div>
@@ -805,31 +851,31 @@ export const TerminalModal: React.FC<TerminalModalProps> = ({
           <div className="space-y-3 text-xs font-mono text-[#D8DEE5]">
             <div className="space-y-2 border-l border-white/10 pl-3">
               <div>
-                <span className="text-[#FF7A18] font-bold">2026 → present</span>
+                <span className="text-[#FF6B53] font-bold">2026 → present</span>
                 <p className="text-[#F5F5F2] font-semibold">Dell Technologies</p>
                 <p className="text-[#69717D] text-[11px]">Service Delivery Engineer · Data Pipelines & ETL</p>
               </div>
 
               <div className="pt-1">
-                <span className="text-[#FF7A18] font-bold">2025</span>
+                <span className="text-[#FF6B53] font-bold">2025</span>
                 <p className="text-[#F5F5F2] font-semibold">Innefu Labs</p>
                 <p className="text-[#69717D] text-[11px]">Software Engineer · Systems & Integrations</p>
               </div>
 
               <div className="pt-1">
-                <span className="text-[#FF7A18] font-bold">2024</span>
+                <span className="text-[#FF6B53] font-bold">2024</span>
                 <p className="text-[#F5F5F2] font-semibold">Xaigi Technology</p>
                 <p className="text-[#69717D] text-[11px]">Backend Developer · OceanMotion & Mimasa AI</p>
               </div>
 
               <div className="pt-1">
-                <span className="text-[#FF7A18] font-bold">2023</span>
+                <span className="text-[#FF6B53] font-bold">2023</span>
                 <p className="text-[#F5F5F2] font-semibold">Terra-link Global</p>
                 <p className="text-[#69717D] text-[11px]">Software Developer Intern · Core Features</p>
               </div>
             </div>
             <div className="text-[11px] text-[#69717D]">
-              Try: <button onClick={() => executeCommand('xaigi')} className="text-[#FF7A18] underline">xaigi</button> or <button onClick={() => executeCommand('open dell')} className="text-[#FF7A18] underline">open dell</button>
+              Try: <button onClick={() => executeCommand('xaigi')} className="text-[#FF6B53] underline">xaigi</button> or <button onClick={() => executeCommand('open dell')} className="text-[#FF6B53] underline">open dell</button>
             </div>
           </div>
         );
@@ -840,22 +886,22 @@ export const TerminalModal: React.FC<TerminalModalProps> = ({
           <div className="space-y-3 text-xs font-mono text-[#D8DEE5]">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div className="space-y-1">
-                <p className="text-[#FF7A18] font-semibold text-[11px]">BACKEND & APIS</p>
+                <p className="text-[#FF6B53] font-semibold text-[11px]">BACKEND & APIS</p>
                 <p className="text-[#69717D] text-xs">Python · Django · Django REST Framework · Redis · Celery</p>
               </div>
 
               <div className="space-y-1">
-                <p className="text-[#FF7A18] font-semibold text-[11px]">GRAPH & DATABASES</p>
+                <p className="text-[#FF6B53] font-semibold text-[11px]">GRAPH & DATABASES</p>
                 <p className="text-[#69717D] text-xs">Neo4j · Cypher (35+ queries) · MySQL · PostgreSQL</p>
               </div>
 
               <div className="space-y-1">
-                <p className="text-[#FF7A18] font-semibold text-[11px]">DATA & ANALYTICS</p>
+                <p className="text-[#FF6B53] font-semibold text-[11px]">DATA & ANALYTICS</p>
                 <p className="text-[#69717D] text-xs">Elasticsearch · OpenSearch · Apache Superset · Redshift ETL</p>
               </div>
 
               <div className="space-y-1">
-                <p className="text-[#FF7A18] font-semibold text-[11px]">AI & AUTOMATION</p>
+                <p className="text-[#FF6B53] font-semibold text-[11px]">AI & AUTOMATION</p>
                 <p className="text-[#69717D] text-xs">RAG · LangChain · NL-to-SQL · Codium · Tabnine</p>
               </div>
             </div>
@@ -870,14 +916,14 @@ export const TerminalModal: React.FC<TerminalModalProps> = ({
           <div className="space-y-3 text-xs font-mono text-[#D8DEE5]">
             <p className="text-[#69717D]">how I approach engineering:</p>
             <div className="space-y-1 pl-2 text-[#D8DEE5]">
-              <p><span className="text-[#FF7A18]">01</span> &nbsp;understand the problem</p>
-              <p><span className="text-[#FF7A18]">02</span> &nbsp;understand the system</p>
-              <p><span className="text-[#FF7A18]">03</span> &nbsp;find the bottleneck</p>
-              <p><span className="text-[#FF7A18]">04</span> &nbsp;build the simplest useful solution</p>
-              <p><span className="text-[#FF7A18]">05</span> &nbsp;measure</p>
-              <p><span className="text-[#FF7A18]">06</span> &nbsp;improve</p>
+              <p><span className="text-[#FF6B53]">01</span> &nbsp;understand the problem</p>
+              <p><span className="text-[#FF6B53]">02</span> &nbsp;understand the system</p>
+              <p><span className="text-[#FF6B53]">03</span> &nbsp;find the bottleneck</p>
+              <p><span className="text-[#FF6B53]">04</span> &nbsp;build the simplest useful solution</p>
+              <p><span className="text-[#FF6B53]">05</span> &nbsp;measure</p>
+              <p><span className="text-[#FF6B53]">06</span> &nbsp;improve</p>
             </div>
-            <div className="pt-2 border-t border-white/6 text-[#FF7A18] italic">
+            <div className="pt-2 border-t border-white/6 text-[#FF6B53] italic">
               &gt; "An API is only one part of the system."
             </div>
           </div>
@@ -894,7 +940,7 @@ export const TerminalModal: React.FC<TerminalModalProps> = ({
               <p className="text-[#69717D] text-[10px]"> &nbsp; ↓</p>
               <p className="text-[#D8DEE5]">frontend</p>
               <p className="text-[#69717D] text-[10px]"> &nbsp; ↓</p>
-              <p className="text-[#FF7A18] font-bold">backend (Xaigi · OceanMotion & Mimasa AI)</p>
+              <p className="text-[#FF6B53] font-bold">backend (Xaigi · OceanMotion & Mimasa AI)</p>
               <p className="text-[#69717D] text-[10px]"> &nbsp; ↓</p>
               <p className="text-[#D8DEE5]">data systems & pipelines (Dell Technologies)</p>
               <p className="text-[#69717D] text-[10px]"> &nbsp; ↓</p>
@@ -906,7 +952,7 @@ export const TerminalModal: React.FC<TerminalModalProps> = ({
                   if (onNavigateSection) onNavigateSection('journey');
                   onClose();
                 }}
-                className="inline-flex items-center gap-1.5 text-[11px] text-[#FF7A18] hover:underline"
+                className="inline-flex items-center gap-1.5 text-[11px] text-[#FF6B53] hover:underline"
               >
                 <span>Explore Interactive Journey in Portfolio ↗</span>
               </button>
@@ -928,7 +974,7 @@ export const TerminalModal: React.FC<TerminalModalProps> = ({
               href={RESUME_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 text-[#FF7A18] hover:underline font-bold"
+              className="inline-flex items-center gap-1.5 text-[#FF6B53] hover:underline font-bold"
             >
               <span>[ Open Resume Directly ↗ ]</span>
             </a>
@@ -971,7 +1017,7 @@ export const TerminalModal: React.FC<TerminalModalProps> = ({
         window.open(profileData.socialLinks.devlore, '_blank', 'noopener,noreferrer');
         outputNode = (
           <div className="space-y-1 text-xs font-mono text-[#D8DEE5]">
-            <p className="text-[#FF7A18] font-bold">DEVLORE</p>
+            <p className="text-[#FF6B53] font-bold">DEVLORE</p>
             <p className="text-[#69717D]">learn · build · share</p>
             <p className="text-emerald-400 font-medium">opening...</p>
             <p className="text-[#69717D]">↗ https://www.instagram.com/thedevlore/</p>
@@ -994,7 +1040,7 @@ export const TerminalModal: React.FC<TerminalModalProps> = ({
               <div className="flex flex-wrap items-center gap-2">
                 <a
                   href={`mailto:${profileData.socialLinks.email}`}
-                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#FF7A18] text-[#090B0D] font-bold text-xs hover:bg-[#FF8B33] transition-colors"
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#FF6B53] text-[#0F161E] font-bold text-xs hover:bg-[#FF7A63] transition-colors"
                 >
                   <Mail className="w-3.5 h-3.5" />
                   <span>Send Email</span>
@@ -1006,7 +1052,7 @@ export const TerminalModal: React.FC<TerminalModalProps> = ({
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 text-[#D8DEE5] border border-white/10 text-xs transition-colors"
                 >
-                  <Linkedin className="w-3.5 h-3.5 text-[#FF7A18]" />
+                  <Linkedin className="w-3.5 h-3.5 text-[#FF6B53]" />
                   <span>LinkedIn ↗</span>
                 </a>
 
@@ -1027,7 +1073,7 @@ export const TerminalModal: React.FC<TerminalModalProps> = ({
         outputNode = (
           <div className="space-y-3 text-xs font-mono text-[#D8DEE5]">
             <div className="space-y-1">
-              <p className="text-[#FF7A18] font-bold">SYSTEM</p>
+              <p className="text-[#FF6B53] font-bold">SYSTEM</p>
               <div className="border-t border-white/10 pt-1 text-[#69717D] space-y-0.5">
                 <p><span className="text-[#D8DEE5] inline-block w-28">profile</span> online</p>
                 <p><span className="text-[#D8DEE5] inline-block w-28">projects</span> 4 indexed</p>
@@ -1036,7 +1082,7 @@ export const TerminalModal: React.FC<TerminalModalProps> = ({
             </div>
 
             <div className="space-y-1">
-              <p className="text-[#FF7A18] font-bold">CURRENT FOCUS</p>
+              <p className="text-[#FF6B53] font-bold">CURRENT FOCUS</p>
               <div className="border-t border-white/10 pt-1 text-[#69717D] space-y-0.5">
                 <p>• backend & distributed systems</p>
                 <p>• data pipeline automation (ETL / Redshift)</p>
@@ -1045,7 +1091,7 @@ export const TerminalModal: React.FC<TerminalModalProps> = ({
             </div>
 
             <div className="space-y-1">
-              <p className="text-[#FF7A18] font-bold">STATUS</p>
+              <p className="text-[#FF6B53] font-bold">STATUS</p>
               <div className="border-t border-white/10 pt-1 text-emerald-400 font-semibold">
                 building.
               </div>
@@ -1059,19 +1105,19 @@ export const TerminalModal: React.FC<TerminalModalProps> = ({
           <div className="space-y-2 text-xs font-mono text-[#D8DEE5]">
             <div className="space-y-1.5">
               <div>
-                <span className="text-[#FF7A18] font-bold inline-block w-32">BACKEND</span>
+                <span className="text-[#FF6B53] font-bold inline-block w-32">BACKEND</span>
                 <span className="text-[#D8DEE5]">Python · Django · DRF · SQL</span>
               </div>
               <div>
-                <span className="text-[#FF7A18] font-bold inline-block w-32">GRAPH & DATA</span>
+                <span className="text-[#FF6B53] font-bold inline-block w-32">GRAPH & DATA</span>
                 <span className="text-[#D8DEE5]">Neo4j · Cypher · Redis · AWS · Celery</span>
               </div>
               <div>
-                <span className="text-[#FF7A18] font-bold inline-block w-32">ANALYTICS</span>
+                <span className="text-[#FF6B53] font-bold inline-block w-32">ANALYTICS</span>
                 <span className="text-[#D8DEE5]">OpenSearch · Redshift · Apache Superset</span>
               </div>
               <div>
-                <span className="text-[#FF7A18] font-bold inline-block w-32">AI COLLABORATION</span>
+                <span className="text-[#FF6B53] font-bold inline-block w-32">AI COLLABORATION</span>
                 <span className="text-[#D8DEE5]">RAG · LangChain · Knowledge Graphs · Agentic workflows</span>
               </div>
             </div>
@@ -1192,7 +1238,7 @@ export const TerminalModal: React.FC<TerminalModalProps> = ({
       case 'neofetch':
         outputNode = (
           <div className="flex flex-col sm:flex-row items-start gap-4 text-xs font-mono text-[#D8DEE5]">
-            <pre className="text-[#FF7A18] font-mono leading-none select-none text-[11px]">
+            <pre className="text-[#FF6B53] font-mono leading-none select-none text-[11px]">
 {`  █████╗  ███████╗
  ██╔══██╗ ██╔════╝
  ███████║ ███████╗
@@ -1203,12 +1249,12 @@ export const TerminalModal: React.FC<TerminalModalProps> = ({
             <div className="space-y-0.5 text-[#D8DEE5] text-[11px]">
               <p className="font-bold text-[#F5F5F2] text-xs">AKASH SINGH</p>
               <p className="text-[#69717D] pb-1">──────────────────────────────</p>
-              <p><span className="text-[#FF7A18] inline-block w-24">Role:</span> Backend & Systems Software Engineer</p>
-              <p><span className="text-[#FF7A18] inline-block w-24">Focus:</span> APIs, Graph DBs, Multi-Tenancy, Search, AI</p>
-              <p><span className="text-[#FF7A18] inline-block w-24">Stack:</span> Python / Django / DRF / Celery</p>
-              <p><span className="text-[#FF7A18] inline-block w-24">Database:</span> Neo4j / Cypher / MySQL / Redis</p>
-              <p><span className="text-[#FF7A18] inline-block w-24">Cloud:</span> AWS (OpenSearch, Redshift, S3)</p>
-              <p><span className="text-[#FF7A18] inline-block w-24">Projects:</span> Mimasa AI, Geek-Search, OceanMotion, EazEae</p>
+              <p><span className="text-[#FF6B53] inline-block w-24">Role:</span> Backend & Systems Software Engineer</p>
+              <p><span className="text-[#FF6B53] inline-block w-24">Focus:</span> APIs, Graph DBs, Multi-Tenancy, Search, AI</p>
+              <p><span className="text-[#FF6B53] inline-block w-24">Stack:</span> Python / Django / DRF / Celery</p>
+              <p><span className="text-[#FF6B53] inline-block w-24">Database:</span> Neo4j / Cypher / MySQL / Redis</p>
+              <p><span className="text-[#FF6B53] inline-block w-24">Cloud:</span> AWS (OpenSearch, Redshift, S3)</p>
+              <p><span className="text-[#FF6B53] inline-block w-24">Projects:</span> Mimasa AI, Geek-Search, OceanMotion, EazEae</p>
             </div>
           </div>
         );
@@ -1218,7 +1264,7 @@ export const TerminalModal: React.FC<TerminalModalProps> = ({
         if (subArg === 'log' || subArg === 'log --oneline') {
           outputNode = (
             <div className="space-y-1.5 text-xs font-mono text-[#D8DEE5]">
-              <p className="text-[#FF7A18] font-semibold">// Recent career commits:</p>
+              <p className="text-[#FF6B53] font-semibold">// Recent career commits:</p>
               <div className="space-y-1 text-[#69717D] pl-2 border-l border-white/10">
                 <p><span className="text-[#7C9CFF]">f4b8291</span> <span className="text-[#D8DEE5]">feat: data ingestion & ETL automation</span> <span className="text-[10px] text-[#69717D]">(Dell Technologies)</span></p>
                 <p><span className="text-[#7C9CFF]">e89a12c</span> <span className="text-[#D8DEE5]">feat: intelligent search & tenant isolation</span> <span className="text-[10px] text-[#69717D]">(Mimasa AI)</span></p>
@@ -1229,7 +1275,7 @@ export const TerminalModal: React.FC<TerminalModalProps> = ({
             </div>
           );
         } else {
-          outputNode = <p className="text-[#69717D] text-xs font-mono">git: try <span className="text-[#FF7A18]">git log --oneline</span></p>;
+          outputNode = <p className="text-[#69717D] text-xs font-mono">git: try <span className="text-[#FF6B53]">git log --oneline</span></p>;
         }
         break;
 
@@ -1238,13 +1284,13 @@ export const TerminalModal: React.FC<TerminalModalProps> = ({
           outputNode = (
             <div className="space-y-2 text-xs font-mono text-[#D8DEE5]">
               <p className="text-emerald-400 font-bold">[sudo] permission granted: initializing candidate review...</p>
-              <div className="p-3 rounded-xl bg-[#111418] border border-emerald-500/30 text-[#D8DEE5] space-y-1">
+              <div className="p-3 rounded-xl bg-[#151E27] border border-emerald-500/30 text-[#D8DEE5] space-y-1">
                 <p className="font-bold text-white">Akash Singh — Backend Software Engineer</p>
                 <p className="text-[#69717D] text-[11px]">Strong in Python, Django, DRF, Neo4j, Redis, REST APIs, and system optimization.</p>
                 <div className="pt-2 flex flex-wrap gap-2">
                   <a
                     href={`mailto:${profileData.socialLinks.email}`}
-                    className="px-2.5 py-1 rounded bg-[#FF7A18] text-[#090B0D] font-bold text-xs"
+                    className="px-2.5 py-1 rounded bg-[#FF6B53] text-[#0F161E] font-bold text-xs"
                   >
                     Send Email Proposal ↗
                   </a>
@@ -1268,7 +1314,7 @@ export const TerminalModal: React.FC<TerminalModalProps> = ({
       case 'coffee':
         outputNode = (
           <div className="space-y-1 text-xs font-mono text-[#D8DEE5]">
-            <pre className="text-[#FF7A18] select-none">
+            <pre className="text-[#FF6B53] select-none">
 {`   (  )   (   )  )
     ) (   )  (  (
   (____)____)____)
@@ -1294,7 +1340,7 @@ export const TerminalModal: React.FC<TerminalModalProps> = ({
             </div>
           );
         } else {
-          outputNode = <p className="text-[#69717D] text-xs font-mono">ping: try <span className="text-[#FF7A18]">ping akash</span></p>;
+          outputNode = <p className="text-[#69717D] text-xs font-mono">ping: try <span className="text-[#FF6B53]">ping akash</span></p>;
         }
         break;
 
@@ -1302,21 +1348,21 @@ export const TerminalModal: React.FC<TerminalModalProps> = ({
         if (subArg === 'future') {
           outputNode = (
             <div className="space-y-1 text-xs font-mono text-[#D8DEE5]">
-              <p className="text-[#FF7A18] font-bold">Building the future...</p>
+              <p className="text-[#FF6B53] font-bold">Building the future...</p>
               <p className="text-[#69717D]">• Distributed systems architecture</p>
               <p className="text-[#69717D]">• Autonomous data validation agents</p>
               <p className="text-[#69717D]">• Reliable, scalable software products</p>
             </div>
           );
         } else {
-          outputNode = <p className="text-[#69717D] text-xs font-mono">make: Nothing to be done for '{subArg}'. Try: <span className="text-[#FF7A18]">make future</span></p>;
+          outputNode = <p className="text-[#69717D] text-xs font-mono">make: Nothing to be done for '{subArg}'. Try: <span className="text-[#FF6B53]">make future</span></p>;
         }
         break;
 
       default:
         outputNode = (
           <div className="text-xs font-mono text-[#69717D]">
-            command not found: "{trimmed}". Type <span className="text-[#FF7A18]">"help"</span> or <span className="text-[#FF7A18]">"projects"</span> for suggestions.
+            command not found: "{trimmed}". Type <span className="text-[#FF6B53]">"help"</span> or <span className="text-[#FF6B53]">"projects"</span> for suggestions.
           </div>
         );
         break;
@@ -1401,10 +1447,10 @@ export const TerminalModal: React.FC<TerminalModalProps> = ({
           animate={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, scale: 1, y: 0 }}
           exit={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, scale: 0.96, y: 15 }}
           transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
-          className="relative w-full max-w-3xl h-[85vh] max-h-[680px] bg-[#0A0D10] border border-white/12 rounded-2xl shadow-2xl overflow-hidden flex flex-col z-10"
+          className="relative w-full max-w-3xl h-[85vh] max-h-[680px] bg-[#0F161E] border border-white/12 rounded-2xl shadow-2xl overflow-hidden flex flex-col z-10"
         >
           {/* Terminal Title Bar */}
-          <div className="flex items-center justify-between px-4 py-3 bg-[#111418] border-b border-white/8 select-none">
+          <div className="flex items-center justify-between px-4 py-3 bg-[#151E27] border-b border-white/8 select-none">
             <div className="flex items-center gap-2">
               <div className="flex items-center gap-1.5">
                 <button
@@ -1429,7 +1475,7 @@ export const TerminalModal: React.FC<TerminalModalProps> = ({
               >
                 {soundEnabled ? (
                   <>
-                    <Volume2 className="w-3.5 h-3.5 text-[#FF7A18]" />
+                    <Volume2 className="w-3.5 h-3.5 text-[#FF6B53]" />
                     <span className="text-[10px] hidden sm:inline text-emerald-400 font-medium">AUDIO ON</span>
                   </>
                 ) : (
@@ -1461,7 +1507,7 @@ export const TerminalModal: React.FC<TerminalModalProps> = ({
             {history.map((entry) => (
               <div key={entry.id} className="space-y-1.5">
                 <div className="flex items-center gap-2 text-[#9A9FA8]">
-                  <span className="text-[#FF7A18] font-bold">akash@dev:{entry.cwd || '~'}$</span>
+                  <span className="text-[#FF6B53] font-bold">akash@dev:{entry.cwd || '~'}$</span>
                   <span className="text-[#F5F5F2]">{entry.command}</span>
                 </div>
                 <div className="pl-4">{entry.output}</div>
@@ -1470,7 +1516,7 @@ export const TerminalModal: React.FC<TerminalModalProps> = ({
 
             {/* Current Input Prompt */}
             <div className="flex items-center gap-2 text-[#9A9FA8] pt-1">
-              <span className="text-[#FF7A18] font-bold shrink-0">akash@dev:{currentDir}$</span>
+              <span className="text-[#FF6B53] font-bold shrink-0">akash@dev:{currentDir}$</span>
               <div className="relative flex-1 flex items-center">
                 <input
                   ref={inputRef}
@@ -1480,7 +1526,7 @@ export const TerminalModal: React.FC<TerminalModalProps> = ({
                   onKeyDown={handleKeyDown}
                   spellCheck={false}
                   autoComplete="off"
-                  className="w-full bg-transparent text-[#F5F5F2] outline-none font-mono text-xs caret-[#FF7A18] z-10"
+                  className="w-full bg-transparent text-[#F5F5F2] outline-none font-mono text-xs caret-[#FF6B53] z-10"
                 />
                 {/* Autocomplete Ghost text */}
                 {autocompleteGhost && (
@@ -1501,31 +1547,31 @@ export const TerminalModal: React.FC<TerminalModalProps> = ({
               <span>Quick:</span>
               <button
                 onClick={() => executeCommand('mimasa')}
-                className="hover:text-[#FF7A18] transition-colors"
+                className="hover:text-[#FF6B53] transition-colors"
               >
                 mimasa
               </button>
               <button
                 onClick={() => executeCommand('oceanmotion')}
-                className="hover:text-[#FF7A18] transition-colors"
+                className="hover:text-[#FF6B53] transition-colors"
               >
                 oceanmotion
               </button>
               <button
                 onClick={() => executeCommand('xaigi')}
-                className="hover:text-[#FF7A18] transition-colors"
+                className="hover:text-[#FF6B53] transition-colors"
               >
                 xaigi
               </button>
               <button
                 onClick={() => executeCommand('architecture')}
-                className="hover:text-[#FF7A18] transition-colors"
+                className="hover:text-[#FF6B53] transition-colors"
               >
                 architecture
               </button>
               <button
                 onClick={() => executeCommand('resume')}
-                className="hover:text-[#FF7A18] transition-colors"
+                className="hover:text-[#FF6B53] transition-colors"
               >
                 resume
               </button>

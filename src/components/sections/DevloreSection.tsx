@@ -13,7 +13,7 @@ export const DevloreSection: React.FC = () => {
   return (
     <CinematicSection
       id="devlore"
-      chapterNumber="07"
+      chapterNumber="08"
       chapterLabel="SIDE INITIATIVE"
       motionType="editorial"
       className="py-24 sm:py-36 relative"
@@ -24,7 +24,7 @@ export const DevloreSection: React.FC = () => {
           variants={shouldReduceMotion ? undefined : childItemScaleVariant}
         >
           <div className="flex items-center gap-3 font-mono text-xs text-[#7E8994]">
-            <span className="text-[#FF6B53] font-bold">07</span>
+            <span className="text-[#FF6B53] font-bold">08</span>
             <span className="text-white/20">/</span>
             <span className="uppercase tracking-widest">TECHNICAL WRITING & COMMUNITY</span>
           </div>

@@ -13,7 +13,7 @@ export const EducationAwards: React.FC = () => {
   return (
     <CinematicSection
       id="foundations"
-      chapterNumber="08"
+      chapterNumber="09"
       chapterLabel="FOUNDATIONS"
       motionType="foundations"
       className="py-24 sm:py-36 relative"
@@ -26,7 +26,7 @@ export const EducationAwards: React.FC = () => {
           variants={shouldReduceMotion ? undefined : childItemVariant}
         >
           <div className="flex items-center gap-3 font-mono text-xs text-[#7E8994]">
-            <span className="text-[#FF6B53] font-bold">08</span>
+            <span className="text-[#FF6B53] font-bold">09</span>
             <span className="text-white/20">/</span>
             <span className="uppercase tracking-widest">FOUNDATIONS & RECOGNITION</span>
           </div>

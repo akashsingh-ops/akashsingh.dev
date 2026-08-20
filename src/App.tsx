@@ -9,6 +9,7 @@ import { ProjectsSection, ProjectId } from './components/projects/ProjectsSectio
 import { JourneyTimeline } from './components/sections/JourneyTimeline';
 import { EngineeringPhilosophy } from './components/sections/EngineeringPhilosophy';
 import { SkillsMatrix } from './components/sections/SkillsMatrix';
+import { ArchitecturePlayground } from './components/sections/ArchitecturePlayground';
 import { DevloreSection } from './components/sections/DevloreSection';
 import { EducationAwards } from './components/sections/EducationAwards';
 import { ContactSection } from './components/sections/ContactSection';
@@ -79,6 +80,7 @@ export default function App() {
         <JourneyTimeline />
         <EngineeringPhilosophy />
         <SkillsMatrix onOpenProject={handleOpenProject} />
+        <ArchitecturePlayground />
         <DevloreSection />
         <EducationAwards />
         <ContactSection />
